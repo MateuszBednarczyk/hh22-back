@@ -1,5 +1,6 @@
 package com.zse.hh22.user.domain;
 
+import com.zse.hh22.civicproject.domain.CivicProjectEntity;
 import com.zse.hh22.user.api.UserRegisterDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Table(name = "users")
 @Entity

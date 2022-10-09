@@ -1,5 +1,6 @@
 package com.zse.hh22.civicproject.domain;
 
+import com.zse.hh22.user.domain.UserEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,9 @@ public class CivicProjectEntity {
     private String city;
     private String description;
     private String justification;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<UserEntity> authors;
 
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private EstimateEntity estimate;

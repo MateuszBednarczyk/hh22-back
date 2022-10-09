@@ -9,6 +9,7 @@ CREATE TABLE public.civic_projects
     estimate_id   bigint
 );
 
+
 ALTER TABLE public.civic_projects
     OWNER TO root;
 
@@ -54,6 +55,7 @@ ALTER TABLE public.estimates
         CACHE 1
         );
 
+
 CREATE TABLE public.schedule_of_activities
 (
     id          bigint NOT NULL,
@@ -61,6 +63,7 @@ CREATE TABLE public.schedule_of_activities
     description character varying(255),
     title       character varying(255)
 );
+
 
 ALTER TABLE public.schedule_of_activities
     OWNER TO root;
@@ -74,6 +77,7 @@ ALTER TABLE public.schedule_of_activities
         NO MAXVALUE
         CACHE 1
         );
+
 
 CREATE TABLE public.users
 (
@@ -102,7 +106,6 @@ ALTER TABLE public.users
         CACHE 1
         );
 
-
 ALTER TABLE ONLY public.civic_projects
     ADD CONSTRAINT civic_projects_pkey PRIMARY KEY (id);
 
@@ -126,4 +129,3 @@ ALTER TABLE ONLY public.civic_projects
 
 ALTER TABLE ONLY public.civic_projects_schedule_of_activities
     ADD CONSTRAINT fkis9ur8w2h9h2k2pya6waieijd FOREIGN KEY (schedule_of_activities_id) REFERENCES public.schedule_of_activities (id);
-
