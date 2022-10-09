@@ -9,5 +9,4 @@ public class Hh22Application {
     public static void main(String[] args) {
         SpringApplication.run(Hh22Application.class, args);
     }
-
 }
