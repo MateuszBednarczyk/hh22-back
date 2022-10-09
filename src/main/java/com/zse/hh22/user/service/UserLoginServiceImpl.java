@@ -20,7 +20,7 @@ class UserLoginServiceImpl implements UserLoginService {
 
     @Override
     public UserDTO userLogin(UserCredentialsDTO requestDTO) {
-        UserDetails user = userDetailsService.loadUserByUsername(requestDTO.PESEL().toString());
+        UserDetails user = userDetailsService.loadUserByUsername(requestDTO.PESEL());
         if (!suffixConfiguration.bCryptPasswordEncoder().matches(requestDTO.password(), user.getPassword())) {
             throw new IllegalArgumentException("Wrong password");
         }

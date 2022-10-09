@@ -1,5 +1,5 @@
 package com.zse.hh22.user.api;
 
-public record UserCredentialsDTO(Integer PESEL, String password) {
+public record UserCredentialsDTO(String PESEL, String password) {
 }
 

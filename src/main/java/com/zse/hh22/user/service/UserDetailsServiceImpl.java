@@ -15,6 +15,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String PESEL) throws UsernameNotFoundException {
-        return userRepository.findByPESEL(Integer.valueOf(PESEL)).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return userRepository.findByPESEL(PESEL).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 }
