@@ -27,7 +27,7 @@ public class UserEntity implements UserDetails {
     private String email;
     private String city;
     private String PESEL;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String password;
     private Role role;
 
