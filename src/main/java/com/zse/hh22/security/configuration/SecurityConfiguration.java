@@ -1,5 +1,7 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.configuration;
 
+import com.zse.hh22.security.service.AuthenticationService;
+import com.zse.hh22.security.service.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

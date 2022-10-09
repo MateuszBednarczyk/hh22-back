@@ -1,5 +1,6 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.configuration;
 
+import com.zse.hh22.security.service.AuthorizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.filter.OncePerRequestFilter;
 

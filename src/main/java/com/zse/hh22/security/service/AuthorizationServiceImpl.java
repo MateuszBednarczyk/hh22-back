@@ -1,4 +1,4 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -17,12 +17,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static com.zse.hh22.security.SecurityFinals.TOKEN_PREFIX;
+import static com.zse.hh22.security.service.SecurityFinals.TOKEN_PREFIX;
 import static java.util.Arrays.stream;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
-class AuthorizationService {
+class AuthorizationServiceImpl implements AuthorizationService {
     public void tryAuthorize(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String token = request.getHeader(AUTHORIZATION).substring(TOKEN_PREFIX.length());
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());

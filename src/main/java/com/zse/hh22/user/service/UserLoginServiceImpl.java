@@ -1,11 +1,10 @@
 package com.zse.hh22.user.service;
 
-import com.zse.hh22.security.SuffixConfiguration;
+import com.zse.hh22.security.configuration.SuffixConfiguration;
 import com.zse.hh22.user.api.UserCredentialsDTO;
 import com.zse.hh22.user.api.UserDTO;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.mapper.UserMapper;
-import com.zse.hh22.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;

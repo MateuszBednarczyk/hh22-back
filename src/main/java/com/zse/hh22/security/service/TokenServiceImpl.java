@@ -1,12 +1,12 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zse.hh22.user.service.UserDetailsServiceImpl;
 import com.zse.hh22.user.domain.UserEntity;
+import com.zse.hh22.user.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,13 +20,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.zse.hh22.security.SecurityFinals.TOKEN_EXPIRATION_TIME;
-import static com.zse.hh22.security.SecurityFinals.TOKEN_PREFIX;
+import static com.zse.hh22.security.service.SecurityFinals.TOKEN_EXPIRATION_TIME;
+import static com.zse.hh22.security.service.SecurityFinals.TOKEN_PREFIX;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 @Service
 @RequiredArgsConstructor
-class TokenService {
+class TokenServiceImpl implements TokenService {
     private final UserDetailsServiceImpl userDetailsService;
 
     Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());

@@ -1,4 +1,4 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zse.hh22.user.domain.UserEntity;
@@ -18,9 +18,9 @@ import java.util.Map;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-class AuthenticationService {
+class AuthenticationServiceImpl implements AuthenticationService {
 
-    private final TokenService tokenService;
+    private final TokenServiceImpl tokenServiceImpl;
     private final UserMapper userMapper;
 
     public UsernamePasswordAuthenticationToken createUsernameAuthenticationToken(HttpServletRequest request, HttpServletResponse response) {
@@ -37,8 +37,8 @@ class AuthenticationService {
     public Map<Object, Object> successfulAuthentication(HttpServletRequest request, HttpServletResponse response, Authentication authResult) {
         UserEntity user = (UserEntity) authResult.getPrincipal();
         String issuer = request.getRequestURI();
-        String accessToken = tokenService.generateAccessToken(user, issuer);
-        String refreshToken = tokenService.generateRefreshToken(user, issuer);
+        String accessToken = tokenServiceImpl.generateAccessToken(user, issuer);
+        String refreshToken = tokenServiceImpl.generateRefreshToken(user, issuer);
         Map<Object, Object> responseBody = new HashMap<>();
         responseBody.put("access_token", accessToken);
         responseBody.put("refresh_token", refreshToken);

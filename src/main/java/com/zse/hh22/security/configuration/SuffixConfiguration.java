@@ -1,4 +1,4 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.endpoint;
 
+import com.zse.hh22.security.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user/token/")
-public class RefreshTokenController {
+class RefreshTokenController {
 
     private final TokenService tokenService;
 

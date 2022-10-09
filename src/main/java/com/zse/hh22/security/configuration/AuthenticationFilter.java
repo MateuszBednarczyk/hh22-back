@@ -1,6 +1,7 @@
-package com.zse.hh22.security;
+package com.zse.hh22.security.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zse.hh22.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
