@@ -127,6 +127,3 @@ ALTER TABLE ONLY public.civic_projects
 ALTER TABLE ONLY public.civic_projects_schedule_of_activities
     ADD CONSTRAINT fkis9ur8w2h9h2k2pya6waieijd FOREIGN KEY (schedule_of_activities_id) REFERENCES public.schedule_of_activities (id);
 
-
--- changeSet hh22:2
-insert into users (pesel, city, email, name, password, phone_number, role, surname) values (123456789, 'olsztyn', 'mati@mati.pl', 'mati', '$2a$10$JHH3aH2pyLeUT5e7XxzhSu1nQLNFZ2HDUt79GLG65p1l8NsQv.nMa', '123456789', '1', 'mati')
