@@ -1,5 +1,6 @@
 package com.zse.hh22.civicproject.domain;
 
+import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
 import com.zse.hh22.user.domain.UserEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,17 +26,21 @@ public class CivicProjectEntity {
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UserEntity> authors;
 
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<UserEntity> likedBy;
+
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private EstimateEntity estimate;
 
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<ScheduleOfActivityEntity> scheduleOfActivities;
 
-    public CivicProjectEntity(String title, String city, String description, String justification, EstimateEntity estimate, List<ScheduleOfActivityEntity> scheduleOfActivities) {
-        this.title = title;
-        this.city = city;
-        this.description = description;
-        this.justification = justification;
+    public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate, List<ScheduleOfActivityEntity> scheduleOfActivities) {
+        this.title = requestDTO.title();
+        this.city = requestDTO.city();
+        this.description = requestDTO.description();
+        this.justification = requestDTO.justification();
+        this.authors = authors;
         this.estimate = estimate;
         this.scheduleOfActivities = scheduleOfActivities;
     }

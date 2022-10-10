@@ -1,5 +1,6 @@
 package com.zse.hh22.civicproject.domain;
 
+import com.zse.hh22.civicproject.api.CreateEstimateDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,9 +20,9 @@ public class EstimateEntity {
     private String description;
     private Float cost;
 
-    public EstimateEntity(String title, String description, Float cost) {
-        this.title = title;
-        this.description = description;
-        this.cost = cost;
+    public EstimateEntity(CreateEstimateDTO requestDTO) {
+        this.title = requestDTO.title();
+        this.description = requestDTO.description();
+        this.cost = requestDTO.cost();
     }
 }
