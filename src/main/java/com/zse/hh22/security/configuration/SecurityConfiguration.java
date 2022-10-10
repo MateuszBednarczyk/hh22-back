@@ -28,15 +28,15 @@ class SecurityConfiguration {
         AuthenticationManager authenticationManager = authenticationManager(httpSecurity.getSharedObject(AuthenticationConfiguration.class));
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager, authenticationService);
 
-        authenticationFilter.setFilterProcessesUrl("/api/user/login");
+        authenticationFilter.setFilterProcessesUrl("/api/v1/user");
         httpSecurity.addFilter(authenticationFilter);
         httpSecurity.addFilterBefore(new AuthorizationFilter(authorizationService), AuthenticationFilter.class);
         httpSecurity.cors();
         httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/login").permitAll();
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/new").permitAll();
 
         return httpSecurity.build();
     }

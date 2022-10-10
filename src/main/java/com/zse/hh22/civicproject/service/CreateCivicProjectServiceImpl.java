@@ -17,7 +17,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-class CreateProjectServiceImpl implements CreateProjectService {
+class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
 
     private final CivicProjectRepository civicProjectRepository;
     private final UserDetailsServiceImpl userDetailsService;
