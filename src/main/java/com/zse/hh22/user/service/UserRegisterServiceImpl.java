@@ -3,6 +3,7 @@ package com.zse.hh22.user.service;
 import com.zse.hh22.security.configuration.SuffixConfiguration;
 import com.zse.hh22.user.api.UserRegisterDTO;
 import com.zse.hh22.user.domain.UserEntity;
+import com.zse.hh22.user.exception.UserWithGivenPeselAlreadyExistsException;
 import com.zse.hh22.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ class UserRegisterServiceImpl implements UserRegisterService {
 
     private void checkIfUserAlreadyExists(UserRegisterDTO requestDTO) {
         if (userRepository.findByPesel(requestDTO.pesel()).isPresent()) {
-            throw new IllegalArgumentException("User with this pesel already exists");
+            throw new UserWithGivenPeselAlreadyExistsException();
         }
     }
 }

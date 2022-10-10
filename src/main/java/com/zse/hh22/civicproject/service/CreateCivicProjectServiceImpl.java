@@ -3,10 +3,10 @@ package com.zse.hh22.civicproject.service;
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
 import com.zse.hh22.civicproject.api.CreateEstimateDTO;
 import com.zse.hh22.civicproject.api.CreateScheduleOfActivityDTO;
-import com.zse.hh22.civicproject.api.EstimateDTO;
 import com.zse.hh22.civicproject.domain.CivicProjectEntity;
 import com.zse.hh22.civicproject.domain.EstimateEntity;
 import com.zse.hh22.civicproject.domain.ScheduleOfActivityEntity;
+import com.zse.hh22.civicproject.exception.CivicProjectWithGivenTitleAlreadyExistsException;
 import com.zse.hh22.civicproject.repository.CivicProjectRepository;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.service.UserDetailsServiceImpl;
@@ -27,6 +27,9 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
 
     @Override
     public void createProject(CreateCivicProjectDTO requestDTO) {
+        if(civicProjectRepository.findByTitle(requestDTO.title()).isPresent()){
+            throw new CivicProjectWithGivenTitleAlreadyExistsException();
+        }
         civicProjectRepository.save(new CivicProjectEntity(requestDTO, getUserEntities(requestDTO), getEstimateEntity(requestDTO.estimate()), getScheduleOfActivityEntities(requestDTO.schedulesOfActivities())));
     }
 
