@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/user/")
@@ -23,13 +25,13 @@ class UserLoginRegisterController {
     private final UserLoginService userLoginService;
 
     @PostMapping("register")
-    public ResponseEntity<Void> registerNewUser(@RequestBody UserRegisterDTO requestDTO) {
+    public ResponseEntity<Void> registerNewUser(@Valid @RequestBody UserRegisterDTO requestDTO) {
         userRegisterService.registerNewUser(requestDTO);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("login")
-    public ResponseEntity<UserDTO> userLogin(@RequestBody UserCredentialsDTO requestDTO) {
+    public ResponseEntity<UserDTO> userLogin(@Valid @RequestBody UserCredentialsDTO requestDTO) {
         return ResponseEntity.ok(userLoginService.userLogin(requestDTO));
     }
 }

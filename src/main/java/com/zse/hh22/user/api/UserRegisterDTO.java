@@ -1,4 +1,7 @@
 package com.zse.hh22.user.api;
 
-public record UserRegisterDTO(String name, String surname, String email, String city, String PESEL, String phoneNumber, String password) {
+import javax.validation.constraints.Pattern;
+
+public record UserRegisterDTO(String name, String surname, String email, String city,
+                              @Pattern(regexp = "[\\d]{11}") String PESEL, String phoneNumber, String password) {
 }

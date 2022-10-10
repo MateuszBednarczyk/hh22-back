@@ -7,5 +7,7 @@ spring:
   jpa:
     show-sql:
       true
+    hibernate:
+        ddl-auto: create-drop
   liquibase:
     change-log: classpath:liquibase-changeLog.xml

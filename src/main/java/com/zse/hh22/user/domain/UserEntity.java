@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -28,10 +29,20 @@ public class UserEntity implements UserDetails {
     private String surname;
     private String email;
     private String city;
+
+    @Pattern(regexp = "[\\d]{11}")
     private String PESEL;
     private String phoneNumber;
     private String password;
+
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<CivicProjectEntity> civicProjects;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private CivicProjectEntity likedCivicProject;
 
     public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder) {
         this.name = registerDTO.name();
@@ -56,7 +67,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.PESEL.toString();
+        return this.PESEL;
     }
 
     @Override
