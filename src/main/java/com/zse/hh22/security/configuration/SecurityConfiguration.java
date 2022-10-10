@@ -37,6 +37,7 @@ class SecurityConfiguration {
 
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/new").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/api/v1/civicproject").authenticated();
 
         return httpSecurity.build();
     }

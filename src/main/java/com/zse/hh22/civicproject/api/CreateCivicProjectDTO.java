@@ -8,9 +8,9 @@ public record CreateCivicProjectDTO(String title,
                                     String city,
                                     String description,
                                     String justification,
-                                    List<UserDTO> authors,
+                                    List<String> authors,
                                     List<UserDTO> likedBy,
-                                    CreateEstimateDTO createEstimateDTO,
-                                    List<CreateScheduleOfActivityDTO> createScheduleOfActivityDTOs) {
+                                    CreateEstimateDTO estimate,
+                                    List<CreateScheduleOfActivityDTO> scheduleOfActivities) {
 }
 

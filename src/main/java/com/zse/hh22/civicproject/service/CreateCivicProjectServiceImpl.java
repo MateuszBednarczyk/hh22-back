@@ -30,7 +30,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
     private List<UserEntity> getUserEntities(CreateCivicProjectDTO requestDTO) {
         List<UserEntity> authors = new ArrayList<>();
         requestDTO.authors().forEach(dto -> {
-            authors.add((UserEntity) userDetailsService.loadUserByUsername(dto.pesel()));
+            authors.add((UserEntity) userDetailsService.loadUserByUsername(dto));
         });
 
         return authors;
@@ -38,7 +38,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
 
     private static List<ScheduleOfActivityEntity> getScheduleOfActivityEntities(CreateCivicProjectDTO requestDTO) {
         List<ScheduleOfActivityEntity> scheduleOfActivities = new ArrayList<>();
-        requestDTO.createScheduleOfActivityDTOs().forEach(dto -> {
+        requestDTO.scheduleOfActivities().forEach(dto -> {
             scheduleOfActivities.add(new ScheduleOfActivityEntity(dto));
         });
 
@@ -46,7 +46,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
     }
 
     private static EstimateEntity getEstimateEntity(CreateCivicProjectDTO requestDTO) {
-        EstimateEntity estimateEntity = new EstimateEntity(requestDTO.createEstimateDTO());
+        EstimateEntity estimateEntity = new EstimateEntity(requestDTO.estimate());
         return estimateEntity;
     }
 }
