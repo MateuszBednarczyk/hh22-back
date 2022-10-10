@@ -31,8 +31,8 @@ class UserRegisterServiceImpl implements UserRegisterService {
     }
 
     private void checkIfUserAlreadyExists(UserRegisterDTO requestDTO) {
-        if (userRepository.findByPESEL(requestDTO.PESEL()).isPresent()) {
-            throw new IllegalArgumentException("User with this PESEL already exists");
+        if (userRepository.findByPesel(requestDTO.pesel()).isPresent()) {
+            throw new IllegalArgumentException("User with this pesel already exists");
         }
     }
 }

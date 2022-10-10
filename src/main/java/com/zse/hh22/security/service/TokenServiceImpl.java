@@ -53,8 +53,8 @@ class TokenServiceImpl implements TokenService {
         try {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(oldRefreshToken);
-            String PESEL = decodedJWT.getSubject();
-            UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(PESEL);
+            String pesel = decodedJWT.getSubject();
+            UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(pesel);
             String accessToken = generateAccessToken(user, request.getRequestURI());
             String newRefreshToken = generateRefreshToken(user, request.getRequestURI());
             Map<String, String> tokens = new HashMap<>();

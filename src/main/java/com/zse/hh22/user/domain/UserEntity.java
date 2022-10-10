@@ -31,7 +31,7 @@ public class UserEntity implements UserDetails {
     private String city;
 
     @Pattern(regexp = "[\\d]{11}")
-    private String PESEL;
+    private String pesel;
     private String phoneNumber;
     private String password;
 
@@ -49,7 +49,7 @@ public class UserEntity implements UserDetails {
         this.surname = registerDTO.surname();
         this.email = registerDTO.email();
         this.city = registerDTO.city();
-        this.PESEL = registerDTO.PESEL();
+        this.pesel = registerDTO.pesel();
         this.phoneNumber = registerDTO.phoneNumber();
         this.password = passwordEncoder.encode(registerDTO.password());
         this.role = Role.ROLE_USER;
@@ -67,7 +67,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.PESEL;
+        return this.pesel;
     }
 
     @Override
