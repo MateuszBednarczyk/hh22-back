@@ -1,14 +1,17 @@
 package com.zse.hh22.user.service;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
+import org.springframework.stereotype.Service;
+
 import com.zse.hh22.security.configuration.SuffixConfiguration;
 import com.zse.hh22.user.api.UserRegisterDTO;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.exception.UserWithGivenPeselAlreadyExistsException;
 import com.zse.hh22.user.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional
@@ -19,9 +22,9 @@ class UserRegisterServiceImpl implements UserRegisterService {
     private final SuffixConfiguration suffixConfiguration;
 
     @Override
-    public void registerNewUser(UserRegisterDTO requestDTO) {
+    public void registerNewUser(@Valid UserRegisterDTO requestDTO) {
         checkIfUserAlreadyExists(requestDTO);
-        if(!isGivenPasswordNull(requestDTO.password())) {
+        if (!isGivenPasswordNull(requestDTO.password())) {
             UserEntity userEntity = new UserEntity(requestDTO, suffixConfiguration.bCryptPasswordEncoder());
             userRepository.save(userEntity);
         }

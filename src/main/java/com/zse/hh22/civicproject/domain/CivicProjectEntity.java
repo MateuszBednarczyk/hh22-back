@@ -11,6 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
 import com.zse.hh22.user.domain.UserEntity;
@@ -28,9 +29,16 @@ public class CivicProjectEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Title cannot be blank")
     private String title;
+
+    @NotBlank(message = "City cannot be blank")
     private String city;
+
+    @NotBlank(message = "Description cannot be blank")
     private String description;
+
+    @NotBlank(message = "Justification cannot be blank")
     private String justification;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

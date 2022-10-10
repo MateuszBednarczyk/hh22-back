@@ -14,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
     private final UserDetailsServiceImpl userDetailsService;
 
     @Override
-    public void createProject(CreateCivicProjectDTO requestDTO) {
+    public void createProject(@Valid CreateCivicProjectDTO requestDTO) {
         if(civicProjectRepository.findByTitle(requestDTO.title()).isPresent()){
             throw new CivicProjectWithGivenTitleAlreadyExistsException();
         }
