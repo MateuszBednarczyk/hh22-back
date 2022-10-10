@@ -12,5 +12,5 @@ public record CivicProjectDTO(Long id,
                               List<UserDTO> authors,
                               List<UserDTO> likedBy,
                               EstimateDTO estimate,
-                              List<ScheduleOfActivityDTO> scheduleOfActivities) {
+                              List<ScheduleOfActivityDTO> schedulesOfActivities) {
 }

@@ -1,10 +1,15 @@
 package com.zse.hh22.civicproject.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.zse.hh22.civicproject.api.CreateEstimateDTO;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Data
 @Entity

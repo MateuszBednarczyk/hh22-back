@@ -11,6 +11,6 @@ public record CreateCivicProjectDTO(String title,
                                     List<String> authors,
                                     List<UserDTO> likedBy,
                                     CreateEstimateDTO estimate,
-                                    List<CreateScheduleOfActivityDTO> scheduleOfActivities) {
+                                    List<CreateScheduleOfActivityDTO> schedulesOfActivities) {
 }
 

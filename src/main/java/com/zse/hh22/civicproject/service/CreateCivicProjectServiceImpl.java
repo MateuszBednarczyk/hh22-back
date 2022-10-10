@@ -1,6 +1,9 @@
 package com.zse.hh22.civicproject.service;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
+import com.zse.hh22.civicproject.api.CreateEstimateDTO;
+import com.zse.hh22.civicproject.api.CreateScheduleOfActivityDTO;
+import com.zse.hh22.civicproject.api.EstimateDTO;
 import com.zse.hh22.civicproject.domain.CivicProjectEntity;
 import com.zse.hh22.civicproject.domain.EstimateEntity;
 import com.zse.hh22.civicproject.domain.ScheduleOfActivityEntity;
@@ -24,7 +27,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
 
     @Override
     public void createProject(CreateCivicProjectDTO requestDTO) {
-        civicProjectRepository.save(new CivicProjectEntity(requestDTO, getUserEntities(requestDTO), getEstimateEntity(requestDTO), getScheduleOfActivityEntities(requestDTO)));
+        civicProjectRepository.save(new CivicProjectEntity(requestDTO, getUserEntities(requestDTO), getEstimateEntity(requestDTO.estimate()), getScheduleOfActivityEntities(requestDTO.schedulesOfActivities())));
     }
 
     private List<UserEntity> getUserEntities(CreateCivicProjectDTO requestDTO) {
@@ -36,17 +39,16 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         return authors;
     }
 
-    private static List<ScheduleOfActivityEntity> getScheduleOfActivityEntities(CreateCivicProjectDTO requestDTO) {
+    private static List<ScheduleOfActivityEntity> getScheduleOfActivityEntities(List<CreateScheduleOfActivityDTO> dtos) {
         List<ScheduleOfActivityEntity> scheduleOfActivities = new ArrayList<>();
-        requestDTO.scheduleOfActivities().forEach(dto -> {
+        dtos.forEach(dto -> {
             scheduleOfActivities.add(new ScheduleOfActivityEntity(dto));
         });
 
         return scheduleOfActivities;
     }
 
-    private static EstimateEntity getEstimateEntity(CreateCivicProjectDTO requestDTO) {
-        EstimateEntity estimateEntity = new EstimateEntity(requestDTO.estimate());
-        return estimateEntity;
+    private static EstimateEntity getEstimateEntity(CreateEstimateDTO dto) {
+        return new EstimateEntity(dto);
     }
 }
