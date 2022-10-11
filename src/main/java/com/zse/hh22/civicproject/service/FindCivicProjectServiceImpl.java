@@ -1,5 +1,9 @@
 package com.zse.hh22.civicproject.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class FindCivicProjectServiceImpl implements FindCivicProjectService {
+class FindCivicProjectServiceImpl implements FindCivicProjectService {
 
     private final CivicProjectRepository civicProjectRepository;
     private final CivicProjectMapper civicProjectMapper;
@@ -28,6 +32,22 @@ public class FindCivicProjectServiceImpl implements FindCivicProjectService {
     @Override
     public CivicProjectDTO findCivicProjectEntityByTitleAndGetDTO(String title) {
         return civicProjectMapper.mapEntityToDto(findCivicProjectEntityByTitle(title));
+    }
+
+    @Override
+    public List<CivicProjectEntity> findAllCivicProjectEntitiesByCity(String city) {
+        return civicProjectRepository.findAllByCity(city).orElse(Collections.EMPTY_LIST);
+    }
+
+    @Override
+    public List<CivicProjectDTO> findAllCivicProjectsDTOsByCity(String city) {
+        List<CivicProjectDTO> foundDTOs = new ArrayList<>();
+        List<CivicProjectEntity> foundEntities = findAllCivicProjectEntitiesByCity(city);
+        for (CivicProjectEntity civicProjectEntity : foundEntities) {
+            foundDTOs.add(civicProjectMapper.mapEntityToDto(civicProjectEntity));
+        }
+        
+        return foundDTOs;
     }
 }
 

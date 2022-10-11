@@ -11,6 +11,8 @@ import com.zse.hh22.civicproject.service.FindCivicProjectService;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/civicproject")
@@ -18,9 +20,14 @@ public class FindCivicProjectController {
 
     private final FindCivicProjectService findCivicProjectService;
 
-    @GetMapping("/{title}")
+    @GetMapping("/title/{title}")
     public ResponseEntity<CivicProjectDTO> findCivicProjectByTitle(@PathVariable String title) {
         return ResponseEntity.ok(findCivicProjectService.findCivicProjectEntityByTitleAndGetDTO(title));
+    }
+
+    @GetMapping("/city/{city}")
+    public ResponseEntity<List<CivicProjectDTO>> findCivicProjectsByCity(@PathVariable String city) {
+        return ResponseEntity.ok(findCivicProjectService.findAllCivicProjectsDTOsByCity(city));
     }
 
 }

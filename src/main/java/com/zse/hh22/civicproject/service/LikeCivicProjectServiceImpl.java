@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
+class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
     private final FindCivicProjectService civicProjectFindService;
