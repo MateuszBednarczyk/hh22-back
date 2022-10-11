@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.zse.hh22.civicproject.domain.CivicProjectEntity;
-import com.zse.hh22.civicproject.exception.UserCityIsNotEqualsToCivicProjectCityException;
+import com.zse.hh22.civicproject.exception.UserCityIsNotEqualsToCivicProjectCityOrUserHasAlreadyLikedOtherCivicProject;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.service.UserDetailsServiceImpl;
 
@@ -30,7 +30,7 @@ public class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
             userEntity.setLikedCivicProject(civicProjectEntity);
             civicProjectEntity.getLikedBy().add(userEntity);
         } else {
-            throw new UserCityIsNotEqualsToCivicProjectCityException();
+            throw new UserCityIsNotEqualsToCivicProjectCityOrUserHasAlreadyLikedOtherCivicProject();
         }
     }
 

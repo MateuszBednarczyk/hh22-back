@@ -20,9 +20,9 @@ public class CivicProjectExceptionHandler {
         return e.getMessage();
     }
 
-    @ExceptionHandler(UserCityIsNotEqualsToCivicProjectCityException.class)
+    @ExceptionHandler(UserCityIsNotEqualsToCivicProjectCityOrUserHasAlreadyLikedOtherCivicProject.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleUserCityIsNotEqualsToCivicProjectCityException(UserCityIsNotEqualsToCivicProjectCityException e) {
+    public String handleUserCityIsNotEqualsToCivicProjectCityException(UserCityIsNotEqualsToCivicProjectCityOrUserHasAlreadyLikedOtherCivicProject e) {
         return e.getMessage();
     }
 

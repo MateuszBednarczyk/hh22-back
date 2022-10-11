@@ -19,7 +19,7 @@ public class LikeCivicProjectController {
     private final LikeCivicProjectService likeCivicProjectService;
 
     @PostMapping("/{title}")
-    public ResponseEntity likeCivicProject(Principal loggedUser, @PathVariable String title) {
+    public ResponseEntity<Void> likeCivicProject(Principal loggedUser, @PathVariable String title) {
         likeCivicProjectService.likeCivicProject(loggedUser, title);
         return ResponseEntity.ok().build();
     }
