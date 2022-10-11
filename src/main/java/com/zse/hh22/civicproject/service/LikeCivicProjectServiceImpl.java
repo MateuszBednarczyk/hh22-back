@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 public class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final CivicProjectFindService civicProjectFindService;
+    private final FindCivicProjectService civicProjectFindService;
 
     @Override
     public void likeCivicProject(Principal loggedUser, String title) {
         UserEntity userEntity = (UserEntity) userDetailsServiceImpl.loadUserByUsername(loggedUser.getName());
-        CivicProjectEntity civicProjectEntity = civicProjectFindService.findCivicProjectByTitle(title);
+        CivicProjectEntity civicProjectEntity = civicProjectFindService.findCivicProjectEntityByTitle(title);
         if (isUserLikedCivicProjectNull(userEntity)
                 && isUserCityAndCivicProjectCityEquals(userEntity.getCity(), civicProjectEntity.getCity())) {
             userEntity.setLikedCivicProject(civicProjectEntity);

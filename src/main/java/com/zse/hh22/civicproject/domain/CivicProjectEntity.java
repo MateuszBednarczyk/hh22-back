@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,6 +55,9 @@ public class CivicProjectEntity {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private List<ScheduleOfActivityEntity> schedulesOfActivities;
 
+    @Enumerated(EnumType.ORDINAL)
+    private CivicProjectState status;
+
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate,
             List<ScheduleOfActivityEntity> schedulesOfActivities) {
         this.title = requestDTO.title();
@@ -62,5 +67,6 @@ public class CivicProjectEntity {
         this.authors = authors;
         this.estimate = estimate;
         this.schedulesOfActivities = schedulesOfActivities;
+        this.status = CivicProjectState.UNVERIFIED;
     }
 }
