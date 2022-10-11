@@ -41,19 +41,20 @@ public class CivicProjectEntity {
     @NotBlank(message = "Justification cannot be blank")
     private String justification;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<UserEntity> authors;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<UserEntity> likedBy;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private EstimateEntity estimate;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private List<ScheduleOfActivityEntity> schedulesOfActivities;
 
-    public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate, List<ScheduleOfActivityEntity> schedulesOfActivities) {
+    public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate,
+            List<ScheduleOfActivityEntity> schedulesOfActivities) {
         this.title = requestDTO.title();
         this.city = requestDTO.city();
         this.description = requestDTO.description();

@@ -1,11 +1,17 @@
 package com.zse.hh22.civicproject.domain;
 
+import java.time.Year;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import com.zse.hh22.civicproject.api.CreateScheduleOfActivityDTO;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.time.Year;
 
 @Data
 @Entity

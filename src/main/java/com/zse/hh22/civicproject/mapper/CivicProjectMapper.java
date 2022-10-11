@@ -8,3 +8,4 @@ import org.mapstruct.Mapper;
 public interface CivicProjectMapper {
     CivicProjectDTO mapEntityToDto(CivicProjectEntity civicProjectEntity);
 }
+
