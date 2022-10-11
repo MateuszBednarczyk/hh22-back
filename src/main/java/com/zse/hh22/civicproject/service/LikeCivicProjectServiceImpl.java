@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.zse.hh22.civicproject.domain.CivicProjectEntity;
-import com.zse.hh22.civicproject.repository.CivicProjectRepository;
+import com.zse.hh22.civicproject.exception.UserCityIsNotEqualsToCivicProjectCityException;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.service.UserDetailsServiceImpl;
 
@@ -19,15 +19,26 @@ import lombok.RequiredArgsConstructor;
 public class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
 
     private final UserDetailsServiceImpl userDetailsServiceImpl;
-    private final CivicProjectRepository civicProjectRepository;
+    private final CivicProjectFindService civicProjectFindService;
 
     @Override
     public void likeCivicProject(Principal loggedUser, String title) {
         UserEntity userEntity = (UserEntity) userDetailsServiceImpl.loadUserByUsername(loggedUser.getName());
-        CivicProjectEntity civicProjectEntity = civicProjectRepository.findByTitle(title).orElseThrow();
-        if(userEntity.getLikedCivicProject() == null){
+        CivicProjectEntity civicProjectEntity = civicProjectFindService.findCivicProjectByTitle(title);
+        if (isUserLikedCivicProjectNull(userEntity)
+                && isUserCityAndCivicProjectCityEquals(userEntity.getCity(), civicProjectEntity.getCity())) {
             userEntity.setLikedCivicProject(civicProjectEntity);
             civicProjectEntity.getLikedBy().add(userEntity);
+        } else {
+            throw new UserCityIsNotEqualsToCivicProjectCityException();
         }
+    }
+
+    private boolean isUserLikedCivicProjectNull(UserEntity userEntity) {
+        return userEntity.getLikedCivicProject() == null;
+    }
+
+    private boolean isUserCityAndCivicProjectCityEquals(String userCity, String civicProjectCity) {
+        return userCity.equals(civicProjectCity);
     }
 }

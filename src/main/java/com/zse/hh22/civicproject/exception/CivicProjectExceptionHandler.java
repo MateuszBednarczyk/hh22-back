@@ -13,4 +13,17 @@ public class CivicProjectExceptionHandler {
     public String handleCivicProjectWithGivenTitleAlreadyExistsException(CivicProjectWithGivenTitleAlreadyExistsException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler(CivicProjectWithGivenTitleDoesNotExistsException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleCivicProjectWithGivenTitleDoesNotExistsException(CivicProjectWithGivenTitleDoesNotExistsException e) {
+        return e.getMessage();
+    }
+
+    @ExceptionHandler(UserCityIsNotEqualsToCivicProjectCityException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleUserCityIsNotEqualsToCivicProjectCityException(UserCityIsNotEqualsToCivicProjectCityException e) {
+        return e.getMessage();
+    }
+
 }
