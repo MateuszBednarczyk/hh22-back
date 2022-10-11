@@ -26,4 +26,10 @@ public class CivicProjectExceptionHandler {
         return e.getMessage();
     }
 
+    @ExceptionHandler(UserCityIsNotEqualsToCivicProjectCityException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleUserCityIsNotEqualsToCivicProjectCityException(UserCityIsNotEqualsToCivicProjectCityException e) {
+        return e.getMessage();
+    }   
+
 }
