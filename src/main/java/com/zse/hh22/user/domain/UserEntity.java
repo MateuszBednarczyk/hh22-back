@@ -42,7 +42,11 @@ public class UserEntity implements UserDetails {
 
     @Pattern(regexp = "[\\d]{11}")
     private String pesel;
+
+    @NotBlank(message = "Phone number cannot be blank")
     private String phoneNumber;
+
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 
     @Enumerated(EnumType.ORDINAL)
