@@ -30,4 +30,9 @@ public class FindCivicProjectController {
         return ResponseEntity.ok(findCivicProjectService.findAllCivicProjectsDTOsByCity(city));
     }
 
+    @GetMapping
+    public ResponseEntity<List<CivicProjectDTO>> findAllCivicProjects() {
+        return ResponseEntity.ok(findCivicProjectService.findAllCivicProjectsDTOs());
+    }
+
 }

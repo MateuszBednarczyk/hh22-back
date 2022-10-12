@@ -10,4 +10,5 @@ public interface FindCivicProjectService {
     CivicProjectDTO findCivicProjectEntityByTitleAndGetDTO(String title);
     List<CivicProjectEntity> findAllCivicProjectEntitiesByCity(String city);
     List<CivicProjectDTO> findAllCivicProjectsDTOsByCity(String city);
+    List<CivicProjectDTO> findAllCivicProjectsDTOs();
 }

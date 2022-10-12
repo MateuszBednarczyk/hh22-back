@@ -36,7 +36,7 @@ class FindCivicProjectServiceImpl implements FindCivicProjectService {
 
     @Override
     public List<CivicProjectEntity> findAllCivicProjectEntitiesByCity(String city) {
-        return civicProjectRepository.findAllByCity(city).orElse(Collections.EMPTY_LIST);
+        return civicProjectRepository.findAllByCity(city).orElse(List.of());
     }
 
     @Override
@@ -47,6 +47,16 @@ class FindCivicProjectServiceImpl implements FindCivicProjectService {
             foundDTOs.add(civicProjectMapper.mapEntityToDto(civicProjectEntity));
         }
         
+        return foundDTOs;
+    }
+
+    @Override
+    public List<CivicProjectDTO> findAllCivicProjectsDTOs() {
+        List<CivicProjectDTO> foundDTOs = new ArrayList<>();
+        civicProjectRepository.findAll().forEach(civicProjectEntity -> {
+            foundDTOs.add(civicProjectMapper.mapEntityToDto(civicProjectEntity));
+        });
+
         return foundDTOs;
     }
 }
