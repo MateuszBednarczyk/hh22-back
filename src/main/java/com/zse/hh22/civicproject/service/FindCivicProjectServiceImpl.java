@@ -36,7 +36,7 @@ class FindCivicProjectServiceImpl implements FindCivicProjectService {
 
     @Override
     public List<CivicProjectEntity> findAllCivicProjectEntitiesByCity(String city) {
-        return civicProjectRepository.findAllByCity(city).orElse(List.of());
+        return civicProjectRepository.findAllByCity(city.toUpperCase()).orElse(List.of());
     }
 
     @Override
