@@ -1,25 +1,13 @@
 package com.zse.hh22.civicproject.domain;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
 import com.zse.hh22.user.domain.UserEntity;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Data
 @Entity
@@ -61,7 +49,7 @@ public class CivicProjectEntity {
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate,
             List<ScheduleOfActivityEntity> schedulesOfActivities) {
         this.title = requestDTO.title();
-        this.city = requestDTO.city();
+        this.city = requestDTO.city().toUpperCase();
         this.description = requestDTO.description();
         this.justification = requestDTO.justification();
         this.authors = authors;
