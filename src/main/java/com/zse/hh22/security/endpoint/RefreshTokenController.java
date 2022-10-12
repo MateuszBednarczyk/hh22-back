@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user/token/")
+@RequestMapping("/api/v1/user/token/")
 class RefreshTokenController {
 
     private final TokenService tokenService;
