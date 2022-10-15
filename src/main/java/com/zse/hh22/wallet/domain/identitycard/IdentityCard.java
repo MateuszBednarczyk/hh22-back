@@ -1,6 +1,5 @@
 package com.zse.hh22.wallet.domain.identitycard;
 
-import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
 import com.zse.hh22.wallet.domain.DocumentStatus;
 import com.zse.hh22.wallet.domain.Sex;
@@ -10,8 +9,8 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
-import java.util.List;
 
 @Table(name = "identity_cards")
 @Entity
@@ -54,6 +53,7 @@ public class IdentityCard {
     private Sex sex;
 
     @NotBlank(message = "CAN number cannot be blank")
+    @Pattern(regexp = "[\\d]{6}")
     private String CAN;
 
     @NotBlank(message = "Place of birth cannot be blank")

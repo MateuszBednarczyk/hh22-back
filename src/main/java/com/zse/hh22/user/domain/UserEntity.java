@@ -71,7 +71,7 @@ public class UserEntity implements UserDetails {
         this.secondName = registerDTO.secondName();
         this.surname = registerDTO.surname();
         this.email = registerDTO.email();
-        this.city = registerDTO.city();
+        this.city = registerDTO.city().toUpperCase();
         this.pesel = registerDTO.pesel();
         this.phoneNumber = registerDTO.phoneNumber();
         this.password = passwordEncoder.encode(registerDTO.password());

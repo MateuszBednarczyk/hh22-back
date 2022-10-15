@@ -46,6 +46,8 @@ public class CivicProjectEntity {
     @Enumerated(EnumType.ORDINAL)
     private CivicProjectState status;
 
+    private int likes;
+
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate,
             List<ScheduleOfActivityEntity> schedulesOfActivities) {
         this.title = requestDTO.title();
@@ -56,5 +58,6 @@ public class CivicProjectEntity {
         this.estimate = estimate;
         this.schedulesOfActivities = schedulesOfActivities;
         this.status = CivicProjectState.UNVERIFIED;
+        this.likes = 0;
     }
 }

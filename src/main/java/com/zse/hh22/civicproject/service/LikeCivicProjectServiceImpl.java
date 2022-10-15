@@ -29,6 +29,7 @@ class LikeCivicProjectServiceImpl implements LikeCivicProjectService {
                 && isUserCityAndCivicProjectCityEquals(userEntity.getCity(), civicProjectEntity.getCity())) {
             userEntity.setLikedCivicProject(civicProjectEntity);
             civicProjectEntity.getLikedBy().add(userEntity);
+            civicProjectEntity.setLikes(civicProjectEntity.getLikes() + 1);
         } else {
             throw new UserCityIsNotEqualsToCivicProjectCityOrUserHasAlreadyLikedOtherCivicProject();
         }

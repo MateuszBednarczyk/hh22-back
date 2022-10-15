@@ -4,7 +4,6 @@ import com.zse.hh22.wallet.domain.DocumentStatus;
 import com.zse.hh22.wallet.domain.Sex;
 
 import java.util.Date;
-import java.util.List;
 
 public record IdentityCardDTO(
         DocumentStatus documentStatus,
