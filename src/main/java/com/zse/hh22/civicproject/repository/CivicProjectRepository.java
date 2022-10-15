@@ -10,5 +10,6 @@ public interface CivicProjectRepository extends JpaRepository<CivicProjectEntity
 
     Optional<CivicProjectEntity> findByTitle(String title);
 
-    Optional<List<CivicProjectEntity>> findAllByCity(String city);
+    Optional<List<CivicProjectEntity>> findAllByCityOrderByLikesDesc(String city);
+
 }

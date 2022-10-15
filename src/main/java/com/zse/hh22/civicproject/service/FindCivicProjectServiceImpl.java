@@ -1,7 +1,6 @@
 package com.zse.hh22.civicproject.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -36,7 +35,7 @@ class FindCivicProjectServiceImpl implements FindCivicProjectService {
 
     @Override
     public List<CivicProjectEntity> findAllCivicProjectEntitiesByCity(String city) {
-        return civicProjectRepository.findAllByCity(city.toUpperCase()).orElse(List.of());
+        return civicProjectRepository.findAllByCityOrderByLikesDesc(city.toUpperCase()).orElse(List.of());
     }
 
     @Override
