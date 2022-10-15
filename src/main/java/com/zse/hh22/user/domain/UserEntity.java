@@ -2,8 +2,10 @@ package com.zse.hh22.user.domain;
 
 import com.zse.hh22.civicproject.domain.CivicProjectEntity;
 import com.zse.hh22.user.api.UserRegisterDTO;
+import com.zse.hh22.wallet.domain.WalletEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,7 +30,10 @@ public class UserEntity implements UserDetails {
     private Long userId;
 
     @NotBlank(message = "Name cannot be blank")
-    private String name;
+    private String firstName;
+
+    @Nullable
+    private String secondName;
 
     @NotBlank(message = "Surname cannot be blank")
     private String surname;
@@ -58,8 +63,12 @@ public class UserEntity implements UserDetails {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private CivicProjectEntity likedCivicProject;
 
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    private WalletEntity wallet;
+
     public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder) {
-        this.name = registerDTO.name();
+        this.firstName = registerDTO.firstName();
+        this.secondName = registerDTO.secondName();
         this.surname = registerDTO.surname();
         this.email = registerDTO.email();
         this.city = registerDTO.city();

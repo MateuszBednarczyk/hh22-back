@@ -1,5 +1,6 @@
 package com.zse.hh22.wallet.domain;
 
+import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.wallet.domain.identitycard.IdentityCard;
 import lombok.Data;
 import lombok.NoArgsConstructor;

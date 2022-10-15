@@ -47,7 +47,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         });
         authors.forEach(user -> {
             if (!user.getCity().equals(requestDTO.city())) {
-                throw new UserCityIsNotEqualsToCivicProjectCityException(user.getName(), user.getSurname());
+                throw new UserCityIsNotEqualsToCivicProjectCityException(user.getFirstName(), user.getSecondName(), user.getSurname());
             }
         });
 

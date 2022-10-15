@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class UserCityIsNotEqualsToCivicProjectCityException extends IllegalArgumentException{
-    public UserCityIsNotEqualsToCivicProjectCityException(String name, String surname){
-        super(USER_CITY_IS_NOT_EQUALS_TO_CIVIC_PROJECT_CITY + ": " + name + " " + surname);
+    public UserCityIsNotEqualsToCivicProjectCityException(String firstName, String secondName, String surname){
+        super(USER_CITY_IS_NOT_EQUALS_TO_CIVIC_PROJECT_CITY + ": " + firstName + " " + " " + secondName + " " + surname);
     }       
 }

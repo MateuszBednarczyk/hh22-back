@@ -1,12 +1,15 @@
 package com.zse.hh22.wallet.domain.identitycard;
 
-import com.zse.hh22.wallet.domain.Name;
+import com.zse.hh22.user.domain.UserEntity;
+import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
+import com.zse.hh22.wallet.domain.DocumentStatus;
 import com.zse.hh22.wallet.domain.Sex;
-import com.zse.hh22.wallet.domain.Surname;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
@@ -20,30 +23,82 @@ public class IdentityCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Name> names;
+    @Enumerated(EnumType.ORDINAL)
+    private DocumentStatus documentStatus;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Surname> surnames;
+    private String imageLink;
 
+    @NotBlank(message = "Names cannot be blank")
+    private String firstName;
+
+    @Nullable
+    private String secondName;
+
+    @NotBlank(message = "Surname cannot be blank")
+    private String surname;
+
+    @NotBlank(message = "Nationality cannot be blank")
     private String nationality;
+
+    @NotBlank(message = "Document number cannot be blank")
     private String documentNumber;
+
+    @NotBlank(message = "Expiry date cannot be blank")
     private Date expiryDate;
+
+    @NotBlank(message = "Date of birth cannot be blank")
     private Date birthDate;
 
     @Enumerated(EnumType.ORDINAL)
+    @NotBlank(message = "Sex cannot be blank")
     private Sex sex;
 
+    @NotBlank(message = "CAN number cannot be blank")
     private String CAN;
+
+    @NotBlank(message = "Place of birth cannot be blank")
     private String placeOfBirth;
+
+    @NotBlank(message = "Pesel cannot be blank")
     private String pesel;
+
+    @NotBlank(message = "Family names cannot be blank")
     private String familyName;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Name> parentsNames;
+    @NotBlank(message = "Mother name cannot be blank")
+    private String motherName;
 
+    @NotBlank(message = "Father name cannot be blank")
+    private String fatherName;
+
+    @NotBlank(message = "Issuing authority cannot be blank")
     private String issuingAuthority;
+
+    @NotBlank(message = "Identity card number cannot be blank")
     private String identityCardNumber;
+
+    @NotBlank(message = "Date of issue cannot be blank")
     private Date dateOfIssue;
 
+    public IdentityCard(CreateIdentityCardDTO requestDTO) {
+        this.documentStatus = DocumentStatus.UNVERIFIED;
+        this.imageLink = requestDTO.imageLink();
+        this.firstName = requestDTO.firstName();
+        this.secondName = requestDTO.secondName();
+        this.surname = requestDTO.surname();
+        this.nationality = requestDTO.nationality();
+        this.documentNumber = requestDTO.documentNumber();
+        this.expiryDate = requestDTO.expiryDate();
+        this.birthDate = requestDTO.birthDate();
+        this.sex = Sex.valueOf(requestDTO.sex().toUpperCase());
+        this.CAN = requestDTO.CAN();
+        this.placeOfBirth = requestDTO.placeOfBirth();
+        this.pesel = requestDTO.pesel();
+        this.familyName = requestDTO.familyName();
+        this.motherName = requestDTO.motherName();
+        this.fatherName = requestDTO.fatherName();
+        this.issuingAuthority = requestDTO.issuingAuthority();
+        this.identityCardNumber = requestDTO.identityCardNumber();
+        this.dateOfIssue = requestDTO.dateOfIssue();
+    }
 }
