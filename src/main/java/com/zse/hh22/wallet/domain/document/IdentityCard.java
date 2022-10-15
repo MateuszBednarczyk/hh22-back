@@ -1,5 +1,6 @@
-package com.zse.hh22.wallet.domain.identitycard;
+package com.zse.hh22.wallet.domain.document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
 import com.zse.hh22.wallet.domain.DocumentStatus;
 import com.zse.hh22.wallet.domain.Sex;
@@ -9,6 +10,7 @@ import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
@@ -25,7 +27,11 @@ public class IdentityCard {
     @Enumerated(EnumType.ORDINAL)
     private DocumentStatus documentStatus;
 
-    private String imageLink;
+    @NotBlank(message = "Link to image cannot be null")
+    private String frontOfDocumentImage;
+
+    @NotBlank(message = "Link to image cannot be null")
+    private String backOfDocumentImage;
 
     @NotBlank(message = "Names cannot be blank")
     private String firstName;
@@ -42,14 +48,16 @@ public class IdentityCard {
     @NotBlank(message = "Document number cannot be blank")
     private String documentNumber;
 
-    @NotBlank(message = "Expiry date cannot be blank")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Expiry date cannot be blank")
     private Date expiryDate;
 
-    @NotBlank(message = "Date of birth cannot be blank")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Date of birth cannot be blank")
     private Date birthDate;
 
     @Enumerated(EnumType.ORDINAL)
-    @NotBlank(message = "Sex cannot be blank")
+    @NotNull(message = "Sex cannot be blank")
     private Sex sex;
 
     @NotBlank(message = "CAN number cannot be blank")
@@ -77,12 +85,14 @@ public class IdentityCard {
     @NotBlank(message = "Identity card number cannot be blank")
     private String identityCardNumber;
 
-    @NotBlank(message = "Date of issue cannot be blank")
+    @NotNull
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfIssue;
 
     public IdentityCard(CreateIdentityCardDTO requestDTO) {
         this.documentStatus = DocumentStatus.UNVERIFIED;
-        this.imageLink = requestDTO.imageLink();
+        this.frontOfDocumentImage = requestDTO.frontOfDocumentImage();
+        this.backOfDocumentImage = requestDTO.backOfDocumentImage();
         this.firstName = requestDTO.firstName();
         this.secondName = requestDTO.secondName();
         this.surname = requestDTO.surname();

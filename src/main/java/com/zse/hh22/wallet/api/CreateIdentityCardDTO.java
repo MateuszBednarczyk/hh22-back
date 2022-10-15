@@ -1,19 +1,22 @@
 package com.zse.hh22.wallet.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public record CreateIdentityCardDTO(
-        @NotBlank(message = "imageLink cannot be blank") String imageLink,
+        @NotBlank(message = "Image link cannot be blank") String frontOfDocumentImage,
+        @NotBlank(message = "Image link cannot be blank") String backOfDocumentImage,
         @NotBlank(message = "First name cannot be blank") String firstName,
         @Nullable String secondName,
         @NotBlank(message = "Surname cannot be blank") String surname,
         @NotBlank(message = "Nationality cannot be blank") String nationality,
         @NotBlank(message = "Document number cannot be blank") String documentNumber,
-        @NotBlank(message = "Expiry date cannot be blank") Date expiryDate,
-        @NotBlank(message = "Date of birth cannot be blank") Date birthDate,
+        @NotNull(message = "Expiry date cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date expiryDate,
+        @NotNull(message = "Date of birth cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate,
         @NotBlank(message = "Sex cannot be blank") String sex,
         @NotBlank(message = "CAN number cannot be blank") String CAN,
         @NotBlank(message = "Place of birth cannot be blank") String placeOfBirth,
@@ -23,5 +26,5 @@ public record CreateIdentityCardDTO(
         @NotBlank(message = "Mother name cannot be blank") String fatherName,
         @NotBlank(message = "Issuing authority cannot be blank") String issuingAuthority,
         @NotBlank(message = "Identity card number cannot be blank") String identityCardNumber,
-        @NotBlank(message = "Date of issue cannot be blank") Date dateOfIssue) {
+        @NotNull(message = "Date of issue cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date dateOfIssue) {
 }
