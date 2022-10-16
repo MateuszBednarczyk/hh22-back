@@ -15,5 +15,6 @@ public record CreateCivicProjectDTO(@NotBlank(message = "Title cannot be blank")
                                     List<UserDTO> likedBy,
                                     List<CreateEstimateDTO> estimates,
                                     List<CreateScheduleOfActivityDTO> schedulesOfActivities,
-                                    List<ImageLinkDTO> images) {
+                                    List<ImageLinkDTO> images,
+                                    @NotBlank(message = "Category cannot be null") String category) {
 }

@@ -54,6 +54,9 @@ public class CivicProjectEntity {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private List<ImageLink> images;
 
+    @Enumerated(EnumType.ORDINAL)
+    private CivicProjectCategory category;
+
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, List<EstimateEntity> estimates,
             List<ScheduleOfActivityEntity> schedulesOfActivities, List<ImageLink> givenImages) {
         this.title = requestDTO.title();
@@ -67,5 +70,6 @@ public class CivicProjectEntity {
         this.status = CivicProjectState.UNVERIFIED;
         this.likes = 0;
         this.images = givenImages;
+        this.category = CivicProjectCategory.valueOf(requestDTO.category().toUpperCase());
     }
 }

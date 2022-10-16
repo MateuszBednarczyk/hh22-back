@@ -1,5 +1,6 @@
 package com.zse.hh22.civicproject.api;
 
+import com.zse.hh22.civicproject.domain.CivicProjectCategory;
 import com.zse.hh22.civicproject.domain.CivicProjectState;
 import com.zse.hh22.user.api.UserDTO;
 
@@ -17,6 +18,7 @@ public record CivicProjectDTO(Long id,
                               List<ScheduleOfActivityDTO> schedulesOfActivities,
                               CivicProjectState status,
                               int likes,
-                              List<ImageLinkDTO> images) {
+                              List<ImageLinkDTO> images,
+                              CivicProjectCategory category) {
 
 }
