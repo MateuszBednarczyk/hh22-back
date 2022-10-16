@@ -39,6 +39,7 @@ public class IdentityCard extends Document {
 
     public IdentityCard(CreateIdentityCardDTO requestDTO) {
         this.documentStatus = DocumentStatus.UNVERIFIED;
+        this.documentType = DocumentType.IDENTITY_CARD;
         this.frontOfDocumentImage = requestDTO.frontOfDocumentImage();
         this.backOfDocumentImage = requestDTO.backOfDocumentImage();
         this.firstName = requestDTO.firstName();

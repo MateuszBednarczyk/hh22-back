@@ -24,6 +24,9 @@ public abstract class Document {
     @Enumerated(EnumType.ORDINAL)
     public DocumentStatus documentStatus;
 
+    @Enumerated(EnumType.ORDINAL)
+    public DocumentType documentType;
+
     @NotBlank(message = "Document number cannot be blank")
     public String documentNumber;
 
