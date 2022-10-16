@@ -22,15 +22,15 @@ public class CreateIdentityCardServiceImpl implements CreateIdentityCardService 
     public void createIdentityCard(CreateIdentityCardDTO requestDTO, Principal loggedUser) {
         UserEntity loggedUserEntity = (UserEntity) userDetailsService.loadUserByUsername(loggedUser.getName());
         WalletEntity wallet = loggedUserEntity.getWallet();
-        if(isWalletCreated(wallet) && isIdentityCardNotCreated(wallet.getIdentityCard())) {
-            wallet.setIdentityCard(new IdentityCard(requestDTO));
-        }else{
+        if (isWalletCreated(wallet) && isIdentityCardNotCreated(wallet)) {
+            wallet.getDocuments().add(new IdentityCard(requestDTO));
+        } else {
             throw new IllegalArgumentException("Create wallet first");
         }
     }
 
-    private static boolean isIdentityCardNotCreated(IdentityCard identityCard) {
-        return identityCard == null;
+    private static boolean isIdentityCardNotCreated(WalletEntity wallet) {
+        return !wallet.getDocuments().contains(IdentityCard.class);
     }
 
     private static boolean isWalletCreated(WalletEntity wallet) {

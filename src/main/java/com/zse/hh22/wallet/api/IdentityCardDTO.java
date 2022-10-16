@@ -1,7 +1,7 @@
 package com.zse.hh22.wallet.api;
 
-import com.zse.hh22.wallet.domain.DocumentStatus;
-import com.zse.hh22.wallet.domain.Sex;
+import com.zse.hh22.wallet.domain.document.DocumentStatus;
+import com.zse.hh22.wallet.domain.document.Sex;
 
 import java.util.Date;
 
