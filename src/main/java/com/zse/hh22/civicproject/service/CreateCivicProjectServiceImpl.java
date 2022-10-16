@@ -6,6 +6,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import com.zse.hh22.civicproject.api.ImageLinkDTO;
+import com.zse.hh22.civicproject.domain.ImageLink;
 import org.springframework.stereotype.Service;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
@@ -37,7 +39,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         }
         civicProjectRepository.save(new CivicProjectEntity(requestDTO, getUserEntitiesAndCheckIfAllOfThemAreFromCivicProjectCity(requestDTO),
                 getEstimateEntity(requestDTO.estimates()),
-                getScheduleOfActivityEntities(requestDTO.schedulesOfActivities())));
+                getScheduleOfActivityEntities(requestDTO.schedulesOfActivities()), getImages(requestDTO.images())));
     }
 
     private List<UserEntity> getUserEntitiesAndCheckIfAllOfThemAreFromCivicProjectCity(CreateCivicProjectDTO requestDTO) {
@@ -54,7 +56,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         return authors;
     }
 
-    private static List<ScheduleOfActivityEntity> getScheduleOfActivityEntities(
+    private List<ScheduleOfActivityEntity> getScheduleOfActivityEntities(
             List<CreateScheduleOfActivityDTO> dtos) {
         List<ScheduleOfActivityEntity> scheduleOfActivities = new ArrayList<>();
         dtos.forEach(dto -> {
@@ -64,7 +66,13 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         return scheduleOfActivities;
     }
 
-    private static List<EstimateEntity> getEstimateEntity(List<CreateEstimateDTO> dtos) {
+    private List<EstimateEntity> getEstimateEntity(List<CreateEstimateDTO> dtos) {
         return dtos.stream().map(EstimateEntity::new).toList();
+    }
+
+    private List<ImageLink> getImages(List<ImageLinkDTO> givenImages){
+        return givenImages.stream().map(image -> {
+            return new ImageLink(image.link());
+        }).toList();
     }
 }

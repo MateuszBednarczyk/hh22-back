@@ -16,6 +16,7 @@ public record CivicProjectDTO(Long id,
                               List<EstimateDTO> estimates,
                               List<ScheduleOfActivityDTO> schedulesOfActivities,
                               CivicProjectState status,
-                              int likes) {
+                              int likes,
+                              List<ImageLinkDTO> images) {
 
 }

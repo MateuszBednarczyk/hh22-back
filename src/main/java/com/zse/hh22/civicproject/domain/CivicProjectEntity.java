@@ -51,8 +51,11 @@ public class CivicProjectEntity {
 
     private int likes;
 
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    private List<ImageLink> images;
+
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, List<EstimateEntity> estimates,
-            List<ScheduleOfActivityEntity> schedulesOfActivities) {
+            List<ScheduleOfActivityEntity> schedulesOfActivities, List<ImageLink> givenImages) {
         this.title = requestDTO.title();
         this.city = requestDTO.city().toUpperCase();
         this.shortDescription = requestDTO.shortDescription();
@@ -63,5 +66,6 @@ public class CivicProjectEntity {
         this.schedulesOfActivities = schedulesOfActivities;
         this.status = CivicProjectState.UNVERIFIED;
         this.likes = 0;
+        this.images = givenImages;
     }
 }

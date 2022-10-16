@@ -14,5 +14,6 @@ public record CreateCivicProjectDTO(@NotBlank(message = "Title cannot be blank")
                                     List<String> authors,
                                     List<UserDTO> likedBy,
                                     List<CreateEstimateDTO> estimates,
-                                    List<CreateScheduleOfActivityDTO> schedulesOfActivities) {
+                                    List<CreateScheduleOfActivityDTO> schedulesOfActivities,
+                                    List<ImageLinkDTO> images) {
 }
