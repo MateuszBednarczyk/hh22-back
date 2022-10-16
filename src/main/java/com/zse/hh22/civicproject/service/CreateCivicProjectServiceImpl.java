@@ -36,7 +36,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
             throw new CivicProjectWithGivenTitleAlreadyExistsException();
         }
         civicProjectRepository.save(new CivicProjectEntity(requestDTO, getUserEntitiesAndCheckIfAllOfThemAreFromCivicProjectCity(requestDTO),
-                getEstimateEntity(requestDTO.estimate()),
+                getEstimateEntity(requestDTO.estimates()),
                 getScheduleOfActivityEntities(requestDTO.schedulesOfActivities())));
     }
 
@@ -64,7 +64,7 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         return scheduleOfActivities;
     }
 
-    private static EstimateEntity getEstimateEntity(CreateEstimateDTO dto) {
-        return new EstimateEntity(dto);
+    private static List<EstimateEntity> getEstimateEntity(List<CreateEstimateDTO> dtos) {
+        return dtos.stream().map(EstimateEntity::new).toList();
     }
 }

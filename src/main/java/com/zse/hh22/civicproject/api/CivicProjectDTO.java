@@ -8,11 +8,12 @@ import java.util.List;
 public record CivicProjectDTO(Long id,
                               String title,
                               String city,
+                              String shortDescription,
                               String description,
                               String justification,
                               List<UserDTO> authors,
                               List<UserDTO> likedBy,
-                              EstimateDTO estimate,
+                              List<EstimateDTO> estimates,
                               List<ScheduleOfActivityDTO> schedulesOfActivities,
                               CivicProjectState status,
                               int likes) {

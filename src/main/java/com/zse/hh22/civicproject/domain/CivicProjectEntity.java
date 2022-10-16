@@ -25,6 +25,9 @@ public class CivicProjectEntity {
     @NotBlank(message = "City cannot be blank")
     private String city;
 
+    @NotBlank(message = "Short description cannot be blank")
+    private String shortDescription;
+
     @NotBlank(message = "Description cannot be blank")
     private String description;
 
@@ -37,8 +40,8 @@ public class CivicProjectEntity {
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     private List<UserEntity> likedBy;
 
-    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
-    private EstimateEntity estimate;
+    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    private List<EstimateEntity> estimates;
 
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
     private List<ScheduleOfActivityEntity> schedulesOfActivities;
@@ -48,14 +51,15 @@ public class CivicProjectEntity {
 
     private int likes;
 
-    public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, EstimateEntity estimate,
+    public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, List<EstimateEntity> estimates,
             List<ScheduleOfActivityEntity> schedulesOfActivities) {
         this.title = requestDTO.title();
         this.city = requestDTO.city().toUpperCase();
+        this.shortDescription = requestDTO.shortDescription();
         this.description = requestDTO.description();
         this.justification = requestDTO.justification();
         this.authors = authors;
-        this.estimate = estimate;
+        this.estimates = estimates;
         this.schedulesOfActivities = schedulesOfActivities;
         this.status = CivicProjectState.UNVERIFIED;
         this.likes = 0;
