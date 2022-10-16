@@ -1,7 +1,5 @@
 package com.zse.hh22.wallet.domain;
 
-import com.zse.hh22.user.domain.UserEntity;
-import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
 import com.zse.hh22.wallet.domain.document.Document;
 import com.zse.hh22.wallet.domain.document.IdentityCard;
 import com.zse.hh22.wallet.exception.WalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated;
@@ -9,11 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.security.Principal;
 import java.util.List;
 
 import static com.zse.hh22.wallet.domain.document.Document.isDocumentOfGivenTypeCreated;
-import static com.zse.hh22.wallet.domain.document.Document.isWalletCreated;
 
 @Table(name = "wallets")
 @Data

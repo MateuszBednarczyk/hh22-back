@@ -1,6 +1,7 @@
 package com.zse.hh22.civicproject.domain;
 
 import java.time.Year;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zse.hh22.civicproject.api.CreateScheduleOfActivityDTO;
 
 import lombok.Data;
@@ -25,7 +27,8 @@ public class ScheduleOfActivityEntity {
 
     private String title;
     private String description;
-    private Year date;
+    @JsonFormat(pattern = "yyyy-MM")
+    private Date date;
 
     public ScheduleOfActivityEntity(CreateScheduleOfActivityDTO requestDTO) {
         this.title = requestDTO.title();
