@@ -14,4 +14,10 @@ public class WalletExceptionHandler {
         return e.getMessage();
     }
 
+    @ExceptionHandler(WalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public String handleWalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated(WalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated e) {
+        return e.getMessage();
+    }
+
 }
