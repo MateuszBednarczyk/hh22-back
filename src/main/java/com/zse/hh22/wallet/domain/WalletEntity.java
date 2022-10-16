@@ -1,6 +1,8 @@
 package com.zse.hh22.wallet.domain;
 
+import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.wallet.domain.document.IdentityCardEntity;
+import com.zse.hh22.wallet.domain.document.PassportEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,9 +21,11 @@ public class WalletEntity {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private IdentityCardEntity identityCard;
 
-    public static boolean isWalletCreated(WalletEntity wallet) {
-        return wallet != null;
-    }
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private PassportEntity passport;
 
+    public static boolean isWalletCreated(UserEntity userEntity) {
+        return userEntity.getWallet() != null;
+    }
 
 }
