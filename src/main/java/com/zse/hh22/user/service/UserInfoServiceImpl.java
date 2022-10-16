@@ -10,7 +10,7 @@ import java.security.Principal;
 
 @Service
 @RequiredArgsConstructor
-public class UserInfoServiceImpl implements UserInfoService {
+class UserInfoServiceImpl implements UserInfoService {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final UserMapper userMapper;

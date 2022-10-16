@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/civicproject")
-public class FindCivicProjectController {
+class FindCivicProjectController {
 
     private final FindCivicProjectService findCivicProjectService;
 

@@ -12,7 +12,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/wallet")
 @RequiredArgsConstructor
-public class CreateWalletController {
+class CreateWalletController {
 
     private final CreateWalletService createWalletService;
 

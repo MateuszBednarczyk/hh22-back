@@ -16,7 +16,7 @@ import java.security.Principal;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class CreateDocumentServiceImpl implements CreateDocumentService {
+class CreateDocumentServiceImpl implements CreateDocumentService {
 
     private final UserDetailsServiceImpl userDetailsService;
 

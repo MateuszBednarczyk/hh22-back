@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/civicproject/favourite")
-public class LikeCivicProjectController {
+class LikeCivicProjectController {
     private final LikeCivicProjectService likeCivicProjectService;
 
     @PostMapping("/{title}")

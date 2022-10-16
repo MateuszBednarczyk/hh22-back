@@ -15,7 +15,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/document")
 @RequiredArgsConstructor
-public class CreateDocumentController {
+class CreateDocumentController {
 
     private final CreateDocumentService createDocumentService;
 

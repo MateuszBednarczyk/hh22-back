@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/civicproject")
 @RequiredArgsConstructor
-public class CreateCivicProjectController {
+class CreateCivicProjectController {
 
     private final CreateCivicProjectService createCivicProjectService;
 

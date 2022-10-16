@@ -13,7 +13,7 @@ import java.security.Principal;
 @RestController
 @RequestMapping("/api/v1/user/info")
 @RequiredArgsConstructor
-public class UserInfoController {
+class UserInfoController {
 
     private final UserInfoService userInfoService;
 

@@ -2,10 +2,7 @@ package com.zse.hh22.wallet.service.wallet;
 
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.service.UserDetailsServiceImpl;
-import com.zse.hh22.wallet.api.IdentityCardDTO;
 import com.zse.hh22.wallet.api.WalletDTO;
-import com.zse.hh22.wallet.domain.document.IdentityCardEntity;
-import com.zse.hh22.wallet.mapper.IdentityCardMapper;
 import com.zse.hh22.wallet.mapper.WalletMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +13,7 @@ import java.security.Principal;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class FindWalletServiceImpl implements FindWalletService {
+class FindWalletServiceImpl implements FindWalletService {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final WalletMapper walletMapper;

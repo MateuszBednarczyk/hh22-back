@@ -13,7 +13,7 @@ import java.security.Principal;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class CreateWalletServiceImpl implements CreateWalletService {
+class CreateWalletServiceImpl implements CreateWalletService {
 
     private final UserDetailsServiceImpl userDetailsService;
 

@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/civicproject/management")
-public class ManageCivicProjectController{
+class ManageCivicProjectController{
     
     private final ManageCivicProjectService manageCivicProjectService;
 

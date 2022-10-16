@@ -1,6 +1,7 @@
 package com.zse.hh22.civicproject.api;
 
 import com.zse.hh22.user.api.UserDTO;
+import com.zse.hh22.user.api.ImageDTO;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -15,6 +16,6 @@ public record CreateCivicProjectDTO(@NotBlank(message = "Title cannot be blank")
                                     List<UserDTO> likedBy,
                                     List<CreateEstimateDTO> estimates,
                                     List<CreateScheduleOfActivityDTO> schedulesOfActivities,
-                                    List<ImageLinkDTO> images,
+                                    List<ImageDTO> images,
                                     @NotBlank(message = "Category cannot be null") String category) {
 }

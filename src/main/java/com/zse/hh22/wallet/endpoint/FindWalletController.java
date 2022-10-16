@@ -14,7 +14,7 @@ import java.security.Principal;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/wallet")
-public class FindWalletController {
+class FindWalletController {
 
     private final FindWalletService findWalletService;
 

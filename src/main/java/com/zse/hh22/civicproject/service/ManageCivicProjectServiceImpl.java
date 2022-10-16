@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ManageCivicProjectServiceImpl implements ManageCivicProjectService {
+class ManageCivicProjectServiceImpl implements ManageCivicProjectService {
 
     private final FindCivicProjectService findCivicProjectService;
 
