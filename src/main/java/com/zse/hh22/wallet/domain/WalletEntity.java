@@ -1,15 +1,10 @@
 package com.zse.hh22.wallet.domain;
 
-import com.zse.hh22.wallet.domain.document.Document;
-import com.zse.hh22.wallet.domain.document.IdentityCard;
-import com.zse.hh22.wallet.exception.WalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated;
+import com.zse.hh22.wallet.domain.document.IdentityCardEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
-
-import static com.zse.hh22.wallet.domain.document.Document.isDocumentOfGivenTypeCreated;
 
 @Table(name = "wallets")
 @Data
@@ -21,18 +16,12 @@ public class WalletEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<Document> documents;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private IdentityCardEntity identityCard;
 
-    private void addDocument(Document document) {
-        this.documents.add(document);
+    public static boolean isWalletCreated(WalletEntity wallet) {
+        return wallet != null;
     }
 
-    public void createNewDocument(Document document) {
-        if (isDocumentOfGivenTypeCreated(this, IdentityCard.class)) {
-            addDocument(document);
-        } else {
-            throw new WalletDoesNotExistOrDocumentOfRquestedTypeIsAlreadyCreated();
-        }
-    }
+
 }

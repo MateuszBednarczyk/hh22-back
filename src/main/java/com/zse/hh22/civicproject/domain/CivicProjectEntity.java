@@ -1,7 +1,7 @@
 package com.zse.hh22.civicproject.domain;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
-import com.zse.hh22.user.domain.ImageLink;
+import com.zse.hh22.user.domain.Image;
 import com.zse.hh22.user.domain.UserEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -53,13 +53,13 @@ public class CivicProjectEntity {
     private int likes;
 
     @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
-    private List<ImageLink> images;
+    private List<Image> images;
 
     @Enumerated(EnumType.ORDINAL)
     private CivicProjectCategory category;
 
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, List<EstimateEntity> estimates,
-            List<ScheduleOfActivityEntity> schedulesOfActivities, List<ImageLink> givenImages) {
+            List<ScheduleOfActivityEntity> schedulesOfActivities, List<Image> givenImages) {
         this.title = requestDTO.title();
         this.city = requestDTO.city().toUpperCase();
         this.shortDescription = requestDTO.shortDescription();

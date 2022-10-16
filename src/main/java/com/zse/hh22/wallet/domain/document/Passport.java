@@ -5,7 +5,7 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-public class Passport extends Document {
+public class Passport extends DocumentEntity {
 
     @NotBlank(message = "Pesel cannot be blank")
     private String pesel;

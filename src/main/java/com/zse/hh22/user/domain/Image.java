@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @Table(name = "images_links")
 @NoArgsConstructor
-public class ImageLink {
+public class Image {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class ImageLink {
 
     private String link;
 
-    public ImageLink(String link) {
+    public Image(String link) {
         this.link = link;
     }
 }

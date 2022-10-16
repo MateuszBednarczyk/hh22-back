@@ -1,6 +1,9 @@
 package com.zse.hh22.wallet.domain.document;
 
+import com.zse.hh22.user.domain.Image;
 import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
@@ -8,8 +11,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-
-public class IdentityCard extends Document {
+@Table(name = "identity_cards")
+@Entity
+@Data
+@NoArgsConstructor
+public class IdentityCardEntity extends DocumentEntity {
 
     @NotBlank(message = "Pesel cannot be blank")
     private String pesel;
@@ -34,11 +40,12 @@ public class IdentityCard extends Document {
     @Pattern(regexp = "[\\d]{6}")
     private String CAN;
 
-    public IdentityCard(CreateIdentityCardDTO requestDTO) {
+    public IdentityCardEntity(CreateIdentityCardDTO requestDTO) {
         this.documentStatus = DocumentStatus.UNVERIFIED;
         this.documentType = DocumentType.IDENTITY_CARD;
-        this.frontOfDocumentImage = requestDTO.frontOfDocumentImage();
-        this.backOfDocumentImage = requestDTO.backOfDocumentImage();
+        this.picture = new Image(requestDTO.picture());
+        this.frontOfDocumentImage = new Image(requestDTO.frontOfDocumentImage());
+        this.backOfDocumentImage = new Image(requestDTO.backOfDocumentImage());
         this.firstName = requestDTO.firstName();
         this.secondName = requestDTO.secondName();
         this.surname = requestDTO.surname();

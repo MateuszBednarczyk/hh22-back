@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import com.zse.hh22.civicproject.api.ImageLinkDTO;
-import com.zse.hh22.user.domain.ImageLink;
+import com.zse.hh22.user.domain.Image;
 import org.springframework.stereotype.Service;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
@@ -70,9 +70,9 @@ class CreateCivicProjectServiceImpl implements CreateCivicProjectService {
         return dtos.stream().map(EstimateEntity::new).toList();
     }
 
-    private List<ImageLink> getImages(List<ImageLinkDTO> givenImages){
+    private List<Image> getImages(List<ImageLinkDTO> givenImages){
         return givenImages.stream().map(image -> {
-            return new ImageLink(image.link());
+            return new Image(image.link());
         }).toList();
     }
 }

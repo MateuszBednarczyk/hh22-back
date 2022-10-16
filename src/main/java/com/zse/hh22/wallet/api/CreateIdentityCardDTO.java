@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public record CreateIdentityCardDTO (
+        @NotBlank(message = "Image cannot be blank") String picture,
         @NotBlank(message = "Image link cannot be blank") String frontOfDocumentImage,
         @NotBlank(message = "Image link cannot be blank") String backOfDocumentImage,
         @NotBlank(message = "First name cannot be blank") String firstName,

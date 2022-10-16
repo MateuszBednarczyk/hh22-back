@@ -1,8 +1,7 @@
 package com.zse.hh22.wallet.domain.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.zse.hh22.user.domain.ImageLink;
-import com.zse.hh22.wallet.domain.WalletEntity;
+import com.zse.hh22.user.domain.Image;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
@@ -16,7 +15,7 @@ import java.util.Date;
 @Entity
 @Data
 @NoArgsConstructor
-public abstract class Document {
+public abstract class DocumentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +27,9 @@ public abstract class Document {
     @Enumerated(EnumType.ORDINAL)
     public DocumentType documentType;
 
-    @OneToOne
-    private ImageLink imageLink;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @NotNull(message = "Picture cannot be blank")
+    public Image picture;
 
     @NotBlank(message = "Names cannot be blank")
     public String firstName;
@@ -43,11 +43,13 @@ public abstract class Document {
     @NotBlank(message = "Document number cannot be blank")
     public String documentNumber;
 
-    @NotBlank(message = "Link to image cannot be null")
-    public String frontOfDocumentImage;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @NotNull(message = "Link to image cannot be null")
+    public Image frontOfDocumentImage;
 
-    @NotBlank(message = "Link to image cannot be null")
-    public String backOfDocumentImage;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @NotNull(message = "Link to image cannot be null")
+    public Image backOfDocumentImage;
 
     @NotBlank(message = "Place of birth cannot be blank")
     public String placeOfBirth;
@@ -66,14 +68,5 @@ public abstract class Document {
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd")
     public Date dateOfIssue;
-
-
-    public static boolean isDocumentOfGivenTypeCreated(WalletEntity wallet, Class documentClass) {
-        return !wallet.getDocuments().contains(documentClass);
-    }
-
-    public static boolean isWalletCreated(WalletEntity wallet) {
-        return wallet != null;
-    }
 
 }
