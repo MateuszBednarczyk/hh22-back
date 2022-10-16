@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import com.zse.hh22.civicproject.api.ImageLinkDTO;
-import com.zse.hh22.civicproject.domain.ImageLink;
+import com.zse.hh22.user.domain.ImageLink;
 import org.springframework.stereotype.Service;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;

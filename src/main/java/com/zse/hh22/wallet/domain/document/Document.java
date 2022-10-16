@@ -1,6 +1,7 @@
 package com.zse.hh22.wallet.domain.document;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.zse.hh22.user.domain.ImageLink;
 import com.zse.hh22.wallet.domain.WalletEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,21 +28,8 @@ public abstract class Document {
     @Enumerated(EnumType.ORDINAL)
     public DocumentType documentType;
 
-    @NotBlank(message = "Document number cannot be blank")
-    public String documentNumber;
-
-    @NotBlank(message = "Link to image cannot be null")
-    public String frontOfDocumentImage;
-
-    @NotBlank(message = "Place of birth cannot be blank")
-    public String placeOfBirth;
-
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Expiry date cannot be blank")
-    public Date expiryDate;
-
-    @NotBlank(message = "Link to image cannot be null")
-    public String backOfDocumentImage;
+    @OneToOne
+    private ImageLink imageLink;
 
     @NotBlank(message = "Names cannot be blank")
     public String firstName;
@@ -52,6 +40,26 @@ public abstract class Document {
     @NotBlank(message = "Surname cannot be blank")
     public String surname;
 
+    @NotBlank(message = "Document number cannot be blank")
+    public String documentNumber;
+
+    @NotBlank(message = "Link to image cannot be null")
+    public String frontOfDocumentImage;
+
+    @NotBlank(message = "Link to image cannot be null")
+    public String backOfDocumentImage;
+
+    @NotBlank(message = "Place of birth cannot be blank")
+    public String placeOfBirth;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Date of birth cannot be blank")
+    public Date birthDate;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Expiry date cannot be blank")
+    public Date expiryDate;
+
     @NotBlank(message = "Issuing authority cannot be blank")
     public String issuingAuthority;
 
@@ -59,9 +67,6 @@ public abstract class Document {
     @JsonFormat(pattern = "yyyy-MM-dd")
     public Date dateOfIssue;
 
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @NotNull(message = "Date of birth cannot be blank")
-    public Date birthDate;
 
     public static boolean isDocumentOfGivenTypeCreated(WalletEntity wallet, Class documentClass) {
         return !wallet.getDocuments().contains(documentClass);

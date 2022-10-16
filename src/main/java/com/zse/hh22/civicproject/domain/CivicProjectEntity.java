@@ -1,6 +1,7 @@
 package com.zse.hh22.civicproject.domain;
 
 import com.zse.hh22.civicproject.api.CreateCivicProjectDTO;
+import com.zse.hh22.user.domain.ImageLink;
 import com.zse.hh22.user.domain.UserEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;

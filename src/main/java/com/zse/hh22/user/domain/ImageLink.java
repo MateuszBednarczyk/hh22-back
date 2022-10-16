@@ -1,4 +1,4 @@
-package com.zse.hh22.civicproject.domain;
+package com.zse.hh22.user.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

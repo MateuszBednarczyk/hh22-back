@@ -1,6 +1,7 @@
 package com.zse.hh22.wallet.domain.document;
 
 import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -29,13 +30,9 @@ public class IdentityCard extends Document {
     @NotBlank(message = "Father name cannot be blank")
     private String fatherName;
 
-    @NotBlank(message = "CAN number cannot be blank")
+    @Nullable
     @Pattern(regexp = "[\\d]{6}")
     private String CAN;
-
-    @NotBlank(message = "Identity card number cannot be blank")
-    private String identityCardNumber;
-
 
     public IdentityCard(CreateIdentityCardDTO requestDTO) {
         this.documentStatus = DocumentStatus.UNVERIFIED;
@@ -57,7 +54,6 @@ public class IdentityCard extends Document {
         this.motherName = requestDTO.motherName();
         this.fatherName = requestDTO.fatherName();
         this.issuingAuthority = requestDTO.issuingAuthority();
-        this.identityCardNumber = requestDTO.identityCardNumber();
         this.dateOfIssue = requestDTO.dateOfIssue();
     }
 }
