@@ -27,6 +27,8 @@ public class DriverLicenceEntity extends DocumentEntity {
     private List<DriverLicencePermition> driverPermitions = new ArrayList<>();
 
     public DriverLicenceEntity(CreateDriverLicenceDTO requestDTO) {
+        this.documentType = DocumentType.DRIVING_LICENSE;
+        this.documentStatus = DocumentStatus.UNVERIFIED;
         this.picture = new Image(requestDTO.picture());
         this.frontOfDocumentImage = new Image(requestDTO.frontOfDocumentImage());
         this.backOfDocumentImage = new Image(requestDTO.backOfDocumentImage());
@@ -40,6 +42,8 @@ public class DriverLicenceEntity extends DocumentEntity {
         requestDTO.permitions().stream().forEach(permition -> {
             this.driverPermitions.add(new DriverLicencePermition(DriverLicenceType.valueOf(permition.type()), permition.dateOfIssue()));
         });
+        this.birthDate = requestDTO.birthDate();
+        this.expiryDate = new Date("01/01/9999");
     }
 
 }

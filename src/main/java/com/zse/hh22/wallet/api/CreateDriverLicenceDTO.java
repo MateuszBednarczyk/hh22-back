@@ -18,6 +18,7 @@ public record CreateDriverLicenceDTO(@NotBlank(message = "Picture cannot be null
                 @Nullable String secondName,
                 @NotBlank(message = "Surname cannot be blank") String surname,
                 @NotBlank(message = "Place of birth cannot be blank") String placeOfBirth,
+                @NotNull(message = "Date of birth cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate,
                 @NotEmpty ArrayList<DriverLicencePermitionDTO> permitions,
                 @NotBlank(message = "Document number cannot be blank") String documentNumber,
                 @NotBlank(message = "Issuing authority cannot be blank") String issuingAuthority,
