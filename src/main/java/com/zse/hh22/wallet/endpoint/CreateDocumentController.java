@@ -1,5 +1,6 @@
 package com.zse.hh22.wallet.endpoint;
 
+import com.zse.hh22.wallet.api.CreateDriverLicenceDTO;
 import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
 import com.zse.hh22.wallet.api.CreatePassportDTO;
 import com.zse.hh22.wallet.service.document.CreateDocumentService;
@@ -28,6 +29,12 @@ class CreateDocumentController {
     @PostMapping("/passport")
     public ResponseEntity<Void> createPassport(@RequestBody CreatePassportDTO requestDTO, Principal loggedUser) {
         createDocumentService.createPassport(requestDTO, loggedUser);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/driver-licence")
+    public ResponseEntity<Void> createDriverLicence(@RequestBody CreateDriverLicenceDTO requestDTO, Principal loggedUser) {
+        createDocumentService.createDriverLicence(requestDTO, loggedUser);
         return ResponseEntity.ok().build();
     }
 

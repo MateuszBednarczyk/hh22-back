@@ -1,7 +1,6 @@
 package com.zse.hh22.wallet.domain.document;
 
 import com.zse.hh22.user.domain.Image;
-import com.zse.hh22.wallet.api.CreateIdentityCardDTO;
 import com.zse.hh22.wallet.api.CreatePassportDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
