@@ -27,7 +27,7 @@ public class Hh22Application {
     @Transactional
     @EventListener(Hh22Application.class)
     public void setupAdminUser(){
-        userRegisterService.registerNewAdmin(new UserRegisterDTO("admin", "admin", "admin", "admin", "admin", "12345678912", "123456789", "admin"));
+        userRegisterService.registerNewAdmin(new UserRegisterDTO("admin", "admin", "admin", "admin@admin.pl", "admin", "12345678912", "123456789", "admin"));
     }
 
 }
