@@ -22,14 +22,18 @@ class UserManagementServiceImpl implements UserManagementService {
     public void changePassword(Principal loggedUser, ChangePasswordDTO requestDTO) {
         UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(loggedUser.getName());
         if (isGivenOldPasswordCorrect(requestDTO, user) && isNewPasswordRepeatingMatchesNewPassword(requestDTO)) {
-            user.setPassword(suffixConfiguration.bCryptPasswordEncoder().encode(requestDTO.newPassword()));
+            user.setPassword(encodePassword(requestDTO));
         } else {
             throw new GivenOldPasswordIsNotCorrectOrOldPasswordRepeatingIsNotCorrectException();
         }
     }
 
+    private String encodePassword(ChangePasswordDTO requestDTO) {
+        return suffixConfiguration.bCryptPasswordEncoder().encode(requestDTO.newPassword());
+    }
+
     private boolean isNewPasswordRepeatingMatchesNewPassword(ChangePasswordDTO requestDTO) {
-        return requestDTO.repeatNewPassword().matches(requestDTO.oldPassword());
+        return requestDTO.repeatNewPassword().matches(requestDTO.newPassword());
     }
 
     private boolean isGivenOldPasswordCorrect(ChangePasswordDTO requestDTO, UserEntity user) {
