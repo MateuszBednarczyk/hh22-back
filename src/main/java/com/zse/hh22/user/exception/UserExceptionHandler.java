@@ -13,4 +13,11 @@ public class UserExceptionHandler {
     public String handleUserWithGivenPeselAlreadyExistsException(UserWithGivenPeselAlreadyExistsException exception) {
         return exception.getMessage();
     }
+
+    @ExceptionHandler(GivenOldPasswordIsNotCorrectOrOldPasswordRepeatingIsNotCorrectException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public String handleGivenOldPasswordIsNotCorrectOrOldPasswordRepeatingIsNotCorrectException(GivenOldPasswordIsNotCorrectOrOldPasswordRepeatingIsNotCorrectException exception) {
+        return exception.getMessage();
+    }
+
 }
