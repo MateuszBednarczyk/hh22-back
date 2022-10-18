@@ -28,6 +28,12 @@ class UserLoginRegisterController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/new/admin")
+    public ResponseEntity<Void> registerNewAdmin(@Valid @RequestBody UserRegisterDTO requestDTO) {
+        userRegisterService.registerNewAdmin(requestDTO);
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping
     public ResponseEntity<UserDTO> userLogin(@Valid @RequestBody UserCredentialsDTO requestDTO) {
         return ResponseEntity.ok(userLoginService.userLogin(requestDTO));

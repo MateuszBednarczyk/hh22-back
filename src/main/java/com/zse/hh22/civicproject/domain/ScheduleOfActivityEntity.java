@@ -1,6 +1,5 @@
 package com.zse.hh22.civicproject.domain;
 
-import java.time.Year;
 import java.util.Date;
 
 import javax.persistence.Entity;

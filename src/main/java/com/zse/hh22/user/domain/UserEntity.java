@@ -66,7 +66,7 @@ public class UserEntity implements UserDetails {
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private WalletEntity wallet;
 
-    public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder) {
+    public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder, Role role) {
         this.firstName = registerDTO.firstName();
         this.secondName = registerDTO.secondName();
         this.surname = registerDTO.surname();
@@ -75,7 +75,7 @@ public class UserEntity implements UserDetails {
         this.pesel = registerDTO.pesel();
         this.phoneNumber = registerDTO.phoneNumber();
         this.password = passwordEncoder.encode(registerDTO.password());
-        this.role = Role.ROLE_USER;
+        this.role = role;
     }
 
     @Override

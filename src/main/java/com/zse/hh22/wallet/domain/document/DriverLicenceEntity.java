@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class DriverLicenceEntity extends DocumentEntity {
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private List<DriverLicencePermition> driverPermitions = new ArrayList<>();
+    private List<DriverLicencePermission> permissions = new ArrayList<>();
 
     public DriverLicenceEntity(CreateDriverLicenceDTO requestDTO) {
         this.documentType = DocumentType.DRIVING_LICENSE;
@@ -39,8 +39,8 @@ public class DriverLicenceEntity extends DocumentEntity {
         this.documentNumber = requestDTO.documentNumber();
         this.issuingAuthority = requestDTO.issuingAuthority();
         this.dateOfIssue = requestDTO.dateOfIssue();
-        requestDTO.permitions().stream().forEach(permition -> {
-            this.driverPermitions.add(new DriverLicencePermition(DriverLicenceType.valueOf(permition.type()), permition.dateOfIssue()));
+        requestDTO.permissions().stream().forEach(permission -> {
+            this.permissions.add(new DriverLicencePermission(permission.driverLicenceType(), permission.dateOfIssue()));
         });
         this.birthDate = requestDTO.birthDate();
         this.expiryDate = new Date("01/01/9999");

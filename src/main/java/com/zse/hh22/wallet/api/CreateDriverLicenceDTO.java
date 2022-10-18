@@ -2,6 +2,7 @@ package com.zse.hh22.wallet.api;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +20,7 @@ public record CreateDriverLicenceDTO(@NotBlank(message = "Picture cannot be null
                 @NotBlank(message = "Surname cannot be blank") String surname,
                 @NotBlank(message = "Place of birth cannot be blank") String placeOfBirth,
                 @NotNull(message = "Date of birth cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate,
-                @NotEmpty ArrayList<DriverLicencePermitionDTO> permitions,
+                @NotEmpty List<DriverLicencePermissionDTO> permissions,
                 @NotBlank(message = "Document number cannot be blank") String documentNumber,
                 @NotBlank(message = "Issuing authority cannot be blank") String issuingAuthority,
                 @NotNull(message = "Date of issue cannot be blank") @JsonFormat(pattern = "yyyy-MM-dd") Date dateOfIssue) {

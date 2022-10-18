@@ -17,9 +17,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "driver_licence_permitions")
+@Table(name = "driver_licence_permissions")
 @NoArgsConstructor
-public class DriverLicencePermition {
+public class DriverLicencePermission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +31,8 @@ public class DriverLicencePermition {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfIssue;
 
-    public DriverLicencePermition(DriverLicenceType driverLicenceType, Date dateOfIssue) {
-        this.driverLicenceType = driverLicenceType;
+    public DriverLicencePermission(String driverLicenceType, Date dateOfIssue) {
+        this.driverLicenceType = DriverLicenceType.valueOf(driverLicenceType);
         this.dateOfIssue = dateOfIssue;
     }
 }
