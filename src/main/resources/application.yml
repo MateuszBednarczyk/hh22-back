@@ -9,5 +9,6 @@ spring:
       true
     hibernate:
         ddl-auto: create-drop
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   liquibase:
     change-log: classpath:liquibase-changeLog.xml
