@@ -8,7 +8,7 @@ import com.zse.hh22.wallet.domain.document.Sex;
 
 import java.util.Date;
 
-public record PassportDTO(DocumentStatus documentStatus, DocumentType documentType, ImageDTO picture,
+public record PassportDTO(DocumentStatus documentStatus, DocumentType documentType, ImageDTO picture, ImageDTO frontOfDocumentImage, ImageDTO backOfDocumentImage,
                           String firstName, String secondName, String surname, String nationality,
                           String documentNumber, @JsonFormat(pattern = "yyyy-MM-dd") Date expiryDate, @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate, Sex sex,
                           String placeOfBirth, String pesel, String issuingAuthority, @JsonFormat(pattern = "yyyy-MM-dd") Date dateOfIssue) {
