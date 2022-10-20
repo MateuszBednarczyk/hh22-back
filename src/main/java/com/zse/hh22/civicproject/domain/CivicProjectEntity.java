@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Data
@@ -27,24 +28,26 @@ public class CivicProjectEntity {
     private String city;
 
     @NotBlank(message = "Short description cannot be blank")
+    @Size(min = 10, max = 255, message = "Short description must be between 10 and 255 characters")
     private String shortDescription;
 
     @NotBlank(message = "Description cannot be blank")
+    @Size(min = 255, max = 4096, message = "Description must be between 255 and 4096 characters")
     private String description;
 
     @NotBlank(message = "Justification cannot be blank")
     private String justification;
 
-    @ManyToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UserEntity> authors;
 
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<UserEntity> likedBy;
 
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<EstimateEntity> estimates;
 
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<ScheduleOfActivityEntity> schedulesOfActivities;
 
     @Enumerated(EnumType.ORDINAL)
@@ -52,14 +55,14 @@ public class CivicProjectEntity {
 
     private int likes;
 
-    @OneToMany(cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE })
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Image> images;
 
     @Enumerated(EnumType.ORDINAL)
     private CivicProjectCategory category;
 
     public CivicProjectEntity(CreateCivicProjectDTO requestDTO, List<UserEntity> authors, List<EstimateEntity> estimates,
-            List<ScheduleOfActivityEntity> schedulesOfActivities, List<Image> givenImages) {
+                              List<ScheduleOfActivityEntity> schedulesOfActivities, List<Image> givenImages) {
         this.title = requestDTO.title();
         this.city = requestDTO.city().toUpperCase();
         this.shortDescription = requestDTO.shortDescription();
