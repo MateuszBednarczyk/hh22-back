@@ -8,5 +8,5 @@ import com.zse.hh22.wallet.domain.document.DocumentType;
 import java.sql.Date;
 import java.util.List;
 
-public record DriverLicenceDTO(DocumentType documentType, DocumentStatus documentStatus, ImageDTO picture, ImageDTO frontOfDocumentImage, ImageDTO backOfDocumentImage, String firstName, String secondName, String surname, String placeOfBirth, @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate, List<DriverLicencePermissionDTO> permissions, String documentNumber, String issuingAuthority, @JsonFormat(pattern = "yyyy-MM-dd") Date dateOfIssue) {
+public record DriverLicenceDTO(Long id, DocumentType documentType, DocumentStatus documentStatus, ImageDTO picture, ImageDTO frontOfDocumentImage, ImageDTO backOfDocumentImage, String firstName, String secondName, String surname, String placeOfBirth, @JsonFormat(pattern = "yyyy-MM-dd") Date birthDate, List<DriverLicencePermissionDTO> permissions, String documentNumber, String issuingAuthority, @JsonFormat(pattern = "yyyy-MM-dd") Date dateOfIssue) {
 }

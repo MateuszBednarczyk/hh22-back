@@ -5,11 +5,18 @@ import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
-public record CreatePassportDTO(@NotBlank(message = "Image cannot be blank") String picture,
-                                @NotBlank(message = "Image link cannot be blank") String frontOfDocumentImage,
-                                @NotBlank(message = "Image link cannot be blank") String backOfDocumentImage,
+public record CreatePassportDTO(@NotBlank(message = "Image cannot be blank")
+                                @Size(max = 512)
+                                String picture,
+                                @NotBlank(message = "Image link cannot be blank")
+                                @Size(max = 512)
+                                String frontOfDocumentImage,
+                                @NotBlank(message = "Image link cannot be blank")
+                                @Size(max = 512)
+                                String backOfDocumentImage,
                                 @NotBlank(message = "First name cannot be blank") String firstName,
                                 @Nullable String secondName,
                                 @NotBlank(message = "Surname cannot be blank") String surname,

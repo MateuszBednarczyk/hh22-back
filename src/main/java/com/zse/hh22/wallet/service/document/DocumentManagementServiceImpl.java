@@ -1,10 +1,8 @@
 package com.zse.hh22.wallet.service.document;
 
-import com.zse.hh22.user.domain.UserEntity;
-import com.zse.hh22.user.service.UserDetailsServiceImpl;
-import com.zse.hh22.wallet.api.VerifyDocumentDTO;
-import com.zse.hh22.wallet.domain.WalletEntity;
+import com.zse.hh22.wallet.domain.document.DocumentEntity;
 import com.zse.hh22.wallet.domain.document.DocumentStatus;
+import com.zse.hh22.wallet.repository.DocumentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,17 +13,12 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class DocumentManagementServiceImpl implements DocumentManagementService {
 
-    private final UserDetailsServiceImpl userDetailsService;
+    private final DocumentRepository documentRepository;
 
     @Override
-    public void verifyDocument(VerifyDocumentDTO requestDTO) {
-        UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(requestDTO.pesel());
-        WalletEntity wallet = user.getWallet();
-        switch (requestDTO.documentType()) {
-            case "PASSPORT" -> wallet.getPassport().setDocumentStatus(DocumentStatus.VERIFIED);
-            case "IDENTITY_CARD" -> wallet.getIdentityCard().setDocumentStatus(DocumentStatus.VERIFIED);
-            case "DRIVING_LICENSE" -> wallet.getDriverLicence().setDocumentStatus(DocumentStatus.VERIFIED);
-            default -> throw new IllegalArgumentException("Document type not supported");
-        }
+    public void verifyDocument(Long id) {
+        DocumentEntity documentEntity = documentRepository.findDocumentEntityById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Document with id " + id + " not found"));
+        documentEntity.setDocumentStatus(DocumentStatus.VERIFIED);
     }
 }
