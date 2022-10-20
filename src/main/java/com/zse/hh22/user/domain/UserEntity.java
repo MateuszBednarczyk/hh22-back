@@ -67,9 +67,9 @@ public class UserEntity implements UserDetails {
     private WalletEntity wallet;
 
     public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder, Role role) {
-        this.firstName = registerDTO.firstName();
-        this.secondName = registerDTO.secondName();
-        this.surname = registerDTO.surname();
+        this.firstName = registerDTO.firstName().toUpperCase();
+        this.secondName = registerDTO.secondName().toUpperCase();
+        this.surname = registerDTO.surname().toUpperCase();
         this.email = registerDTO.email();
         this.city = registerDTO.city().toUpperCase();
         this.pesel = registerDTO.pesel();
