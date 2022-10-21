@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.zse.hh22.civicproject.api.CreateScheduleOfActivityDTO;
@@ -27,6 +28,7 @@ public class ScheduleOfActivityEntity {
     private String title;
     private String description;
     @JsonFormat(pattern = "yyyy-MM")
+    @Future
     private Date date;
 
     public ScheduleOfActivityEntity(CreateScheduleOfActivityDTO requestDTO) {
