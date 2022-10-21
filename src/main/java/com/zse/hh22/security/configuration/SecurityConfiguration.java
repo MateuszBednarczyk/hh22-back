@@ -40,7 +40,8 @@ class SecurityConfiguration {
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/new/admin").hasRole("ADMIN");
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/info").authenticated();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/token/refresh").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/api/v1/civicproject").authenticated();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/civicproject").authenticated();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/civicproject").permitAll();
         httpSecurity.authorizeRequests().antMatchers("/api/v1/document").authenticated();
         httpSecurity.authorizeRequests().antMatchers("/api/v1/wallet").authenticated();
         httpSecurity.authorizeRequests().antMatchers("/api/v1/civicproject/management/**").hasRole("ADMIN");
