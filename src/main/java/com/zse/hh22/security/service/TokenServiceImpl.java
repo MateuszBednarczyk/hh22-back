@@ -44,6 +44,7 @@ class TokenServiceImpl implements TokenService {
         return JWT.create()
                 .withSubject(user.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRATION_TIME * 2))
+                .withClaim("roles", user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
                 .withIssuer(issuer)
                 .sign(algorithm);
     }
@@ -53,8 +54,8 @@ class TokenServiceImpl implements TokenService {
         try {
             JWTVerifier verifier = JWT.require(algorithm).build();
             DecodedJWT decodedJWT = verifier.verify(oldRefreshToken);
-            String PESEL = decodedJWT.getSubject();
-            UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(PESEL);
+            String pesel = decodedJWT.getSubject();
+            UserEntity user = (UserEntity) userDetailsService.loadUserByUsername(pesel);
             String accessToken = generateAccessToken(user, request.getRequestURI());
             String newRefreshToken = generateRefreshToken(user, request.getRequestURI());
             Map<String, String> tokens = new HashMap<>();

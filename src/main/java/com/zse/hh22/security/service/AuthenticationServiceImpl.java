@@ -26,9 +26,9 @@ class AuthenticationServiceImpl implements AuthenticationService {
     public UsernamePasswordAuthenticationToken createUsernameAuthenticationToken(HttpServletRequest request, HttpServletResponse response) {
         try {
             Map<String, String> requestMap = new ObjectMapper().readValue(request.getInputStream(), Map.class);
-            Integer PESEL = Integer.valueOf(requestMap.get("PESEL"));
+            String pesel = requestMap.get("pesel");
             String password = requestMap.get("password");
-            return new UsernamePasswordAuthenticationToken(PESEL, password);
+            return new UsernamePasswordAuthenticationToken(pesel, password);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,16 +1,23 @@
 package com.zse.hh22.user.domain;
 
+import com.zse.hh22.civicproject.domain.CivicProjectEntity;
 import com.zse.hh22.user.api.UserRegisterDTO;
+import com.zse.hh22.wallet.domain.WalletEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Table(name = "users")
 @Entity
@@ -22,24 +29,53 @@ public class UserEntity implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    private String name;
+    @NotBlank(message = "Name cannot be blank")
+    private String firstName;
+
+    @Nullable
+    private String secondName;
+
+    @NotBlank(message = "Surname cannot be blank")
     private String surname;
+
+    @NotBlank(message = "Email cannot be blank")
+    @Email(message = "Email should be valid")
     private String email;
+
+    @NotBlank(message = "City cannot be blank")
     private String city;
-    private Integer PESEL;
-    private Integer phoneNumber;
+
+    @Pattern(regexp = "[\\d]{11}")
+    private String pesel;
+
+    @NotBlank(message = "Phone number cannot be blank")
+    private String phoneNumber;
+
+    @NotBlank(message = "Password cannot be blank")
     private String password;
+
+    @Enumerated(EnumType.ORDINAL)
     private Role role;
 
-    public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder) {
-        this.name = registerDTO.name();
-        this.surname = registerDTO.surname();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<CivicProjectEntity> civicProjects;
+
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private CivicProjectEntity likedCivicProject;
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
+    private WalletEntity wallet;
+
+    public UserEntity(UserRegisterDTO registerDTO, PasswordEncoder passwordEncoder, Role role) {
+        this.firstName = registerDTO.firstName().toUpperCase();
+        this.secondName = registerDTO.secondName().toUpperCase();
+        this.surname = registerDTO.surname().toUpperCase();
         this.email = registerDTO.email();
-        this.city = registerDTO.city();
-        this.PESEL = registerDTO.PESEL();
+        this.city = registerDTO.city().toUpperCase();
+        this.pesel = registerDTO.pesel();
         this.phoneNumber = registerDTO.phoneNumber();
         this.password = passwordEncoder.encode(registerDTO.password());
-        this.role = Role.ROLE_USER;
+        this.role = role;
     }
 
     @Override
@@ -54,7 +90,7 @@ public class UserEntity implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.PESEL.toString();
+        return this.pesel;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.zse.hh22.user.api;
 
-public record UserCredentialsDTO(Integer PESEL, String password) {
+import javax.validation.constraints.Pattern;
+
+public record UserCredentialsDTO(@Pattern(regexp = "[\\d]{11}") String pesel, String password) {
 }
 

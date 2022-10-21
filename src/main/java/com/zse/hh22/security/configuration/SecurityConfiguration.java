@@ -28,15 +28,23 @@ class SecurityConfiguration {
         AuthenticationManager authenticationManager = authenticationManager(httpSecurity.getSharedObject(AuthenticationConfiguration.class));
         AuthenticationFilter authenticationFilter = new AuthenticationFilter(authenticationManager, authenticationService);
 
-        authenticationFilter.setFilterProcessesUrl("/api/user/login");
+        authenticationFilter.setFilterProcessesUrl("/api/v1/user");
         httpSecurity.addFilter(authenticationFilter);
         httpSecurity.addFilterBefore(new AuthorizationFilter(authorizationService), AuthenticationFilter.class);
         httpSecurity.cors();
         httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/login").permitAll();
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/user/register").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/new").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/new/admin").hasRole("ADMIN");
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/user/info").authenticated();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/token/refresh").permitAll();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/api/v1/civicproject").authenticated();
+        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/api/v1/civicproject").permitAll();
+        httpSecurity.authorizeRequests().antMatchers("/api/v1/document").authenticated();
+        httpSecurity.authorizeRequests().antMatchers("/api/v1/wallet").authenticated();
+        httpSecurity.authorizeRequests().antMatchers("/api/v1/civicproject/management/**").hasRole("ADMIN");
 
         return httpSecurity.build();
     }
@@ -45,5 +53,6 @@ class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
 }
 

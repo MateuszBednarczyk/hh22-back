@@ -6,13 +6,11 @@ import com.zse.hh22.user.api.UserDTO;
 import com.zse.hh22.user.domain.UserEntity;
 import com.zse.hh22.user.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 class UserLoginServiceImpl implements UserLoginService {
     private final UserDetailsServiceImpl userDetailsService;
     private final SuffixConfiguration suffixConfiguration;
@@ -20,9 +18,9 @@ class UserLoginServiceImpl implements UserLoginService {
 
     @Override
     public UserDTO userLogin(UserCredentialsDTO requestDTO) {
-        UserDetails user = userDetailsService.loadUserByUsername(requestDTO.PESEL().toString());
+        UserDetails user = userDetailsService.loadUserByUsername(requestDTO.pesel());
         if (!suffixConfiguration.bCryptPasswordEncoder().matches(requestDTO.password(), user.getPassword())) {
-            throw new IllegalArgumentException("Wrong password");
+            return null;
         }
 
         return userMapper.mapEntityToDto((UserEntity) user);
