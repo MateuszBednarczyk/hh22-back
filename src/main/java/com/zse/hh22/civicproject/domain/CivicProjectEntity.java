@@ -36,6 +36,7 @@ public class CivicProjectEntity {
     private String description;
 
     @NotBlank(message = "Justification cannot be blank")
+    @Size(min = 50, max = 4096, message = "Justification must be between 50 and 4096 characters")
     private String justification;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

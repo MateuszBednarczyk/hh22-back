@@ -16,7 +16,9 @@ public record CreateCivicProjectDTO(@NotBlank(message = "Title cannot be blank")
                                     @NotBlank(message = "Description cannot be blank")
                                     @Size(min = 255, max = 4096, message = "Description must be between 255 and 4096 characters")
                                     String description,
-                                    @NotBlank(message = "Justification cannot be blank") String justification,
+                                    @NotBlank(message = "Justification cannot be blank")
+                                    @Size(min = 50, max = 4096, message = "Justification must be between 50 and 4096 characters")
+                                    String justification,
                                     List<String> authors,
                                     List<UserDTO> likedBy,
                                     List<CreateEstimateDTO> estimates,
